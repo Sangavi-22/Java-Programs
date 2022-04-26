@@ -57,7 +57,7 @@ class Main{
                 System.out.println("Enter your email");
                 email=sc.nextLine(); 
                 sc.nextLine();
-                System.out.println("Enter your password."); 
+                System.out.println("Enter your password"); 
                 new_id=sc.nextLine(); 
                 Previoususer pu=new Previoususer(email,new_id);   
                 pu.display();
