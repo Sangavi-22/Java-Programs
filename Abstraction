@@ -1,0 +1,61 @@
+import java.util.Scanner; 
+abstract class Employee{  //This class contains abstract and non-abstract methods
+    public String employeeName,designation;  
+    double basePay,dearnessAllowance,houseRentAllowance,providentFund,staffClubFund,grossPay,netPay,yearlyBonus;
+    int employeeId; 
+    void setEmployeeDetails(String employeeName,String designation,int employeeId,double basePay){ 
+        this.employeeName=employeeName; 
+        this.designation=designation;
+        this.employeeId=employeeId;  
+        this.basePay=basePay; 
+    }
+    void calculateSalary(){ 
+        dearnessAllowance=0.97*basePay;
+        houseRentAllowance=0.10*basePay;
+        providentFund=0.12*basePay;
+        staffClubFund=0.001*basePay;
+        grossPay=basePay+dearnessAllowance+houseRentAllowance;
+        netPay=grossPay-providentFund-staffClubFund+yearlyBonus; 
+        System.out.println("Name: "+employeeName); 
+        System.out.println("Designation: "+designation); 
+        System.out.println("Employee id: "+employeeId); 
+        System.out.println("The yearlyBonus of Professor is "+yearlyBonus);
+    } 
+    abstract void calculateYearlyBonus(double basePay); 
+}
+class Professor extends Employee{
+    @Override 
+    void calculateYearlyBonus(double basePay){ //Method overriden
+        yearlyBonus=basePay*0.3;  
+    } 
+}   
+class AssociateProfessor extends Employee{  
+    @Override
+    void calculateYearlyBonus(){  //Method Overriden
+       yearlyBonus=basePay*0.1; 
+    }
+    
+} 
+class Main{ 
+    public static void main(String[] args()){ 
+        String employeeName,designation; 
+        int employeeId; 
+        double basePay;
+        Scanner sc=new Scanner(System.in);  
+        System.out.println("Welcome"); 
+        System.out.println("Please enter the following details:\n1.Name\n2.Employee Id\n3.Designation\n4.Base Pay"); 
+        employeeName=sc.nextLine(); 
+        designation=sc.nextLine(); 
+        employeeId=sc.nextInt(); 
+        basePay=sc.nextDouble();
+        Professor professorSalary=new Professor();  
+        professorSalary.setEmployeeDetails(employeeName,designation,employeeId,basePay); 
+        professorSalary.calculateYearlyBonus(basePay);
+        professorSalary.calculateSalary(); 
+        AssociateProfessor associateProfessorSalary=new AssociateProfessor(); 
+        associateProfessorSalary.setEmployeeDetails(employeeName,designation,employeeId,basePay); 
+        associateProfessorSalary.calculateYearlyBonus(); 
+        associateProfessorSalary.calculateSalary(); 
+        System.out.println("Thankyou");
+    } 
+}
