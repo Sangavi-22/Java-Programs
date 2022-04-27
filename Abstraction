@@ -21,7 +21,7 @@ abstract class Employee{  //This class contains abstract and non-abstract method
         System.out.println("Designation: "+designation); 
         System.out.println("Employee id: "+employeeId); 
         System.out.println("GrossPay: "+grossPay); 
-        System.out.println("Net Pay:"+netPay); 
+        System.out.println("Net Pay: "+netPay); 
         System.out.println("The yearly bonus of Professor is "+yearlyBonus);
     } 
     
@@ -32,10 +32,9 @@ class Professor extends Employee{
     } 
 }   
 class AssociateProfessor extends Employee{  
-    void calculateYearlyBonus(double basePay){  
-       yearlyBonus=basePay*0.1; 
+    void calculateYearlyBonus(double basePay){ 
+        yearlyBonus=basePay*0.1; 
     }
-    
 } 
 class Main{ 
     public static void main(String[] args){ 
@@ -57,7 +56,8 @@ class Main{
                 professorSalary.calculateYearlyBonus(basePay);
                 professorSalary.calculateSalary(); 
                 break;
-            case "AssociateProfessor":
+            case "Associate":
+                System.out.println("Please enter the following details:\n1.Name\n2.Employee Id\n4.Base Pay"); 
                 employeeName=sc.nextLine();
                 employeeId=sc.nextInt(); 
                 basePay=sc.nextDouble();
