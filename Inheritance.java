@@ -8,7 +8,7 @@ class Member{
         role=memberRole;
         id=idNum;  
     }
-    void display(){ 
+    void displayMemberData(){ 
         System.out.println("Please verify all the details: "); 
         System.out.println("Displaying Members details: ");  
         System.out.println("Name: "+name);
@@ -61,7 +61,7 @@ class Main{
             qualification=sc.nextLine(); 
             designation=sc.nextLine(); 
             teacher.setTeacherData(qualification,designation); 
-            teacher.display(); 
+            teacher.displayMemberData(); 
         } 
         else{
             student.setMemberData(name,department,role,id);
@@ -71,7 +71,7 @@ class Main{
             rollNo=sc.nextLine();
             standardStudying=sc.nextInt(); 
             student.setStudentData(subject,rollNo,standardStudying); 
-            student.display(); 
+            student.displayMemberData(); 
         } 
         System.out.println("Acknowledge that you have verified the details by typing Yes"); 
         choice=sc.nextLine(); 
