@@ -1,23 +1,23 @@
 import java.util.Scanner; 
 class Member{ 
-    String name,department,role,qualification,designation,majorSubject,rollNumber;
-    int id,standard;  
-    void setMemberData(String memberName,String departmentName, String memberRole,int idNum){  
-        name=memberName; 
-        department=departmentName; 
-        role=memberRole;
-        id=idNum;  
+    String memberName,departmentName,memberRole,qualification,designationName,majorSubject,rollNumber;
+    int idNum,standard;  
+    void setMemberData(String name,String department, String role,int id){  
+        memberName=name; 
+        departmentName=department; 
+        memberRole=role;
+        idNum=id;  
     }
     void displayMemberData(){ 
         System.out.println("Please verify all the details: "); 
         System.out.println("Displaying Members details: ");  
-        System.out.println("Name: "+name);
-        System.out.println("Department: "+department); 
-        System.out.println("Role: "+role); 
-        System.out.println("Id: "+id);
-        if (role.equals("Teacher")){ 
+        System.out.println("Name: "+memberName);
+        System.out.println("Department: "+departmentName); 
+        System.out.println("Role: "+memberRole); 
+        System.out.println("Id: "+idNum);
+        if (memberRole.equals("Teacher")){ 
             System.out.println("Qualification: "+qualification); 
-            System.out.println("Designation: "+designation); 
+            System.out.println("Designation: "+designationName); 
         } 
         else{ 
             System.out.println("Major Subject: "+majorSubject); 
@@ -27,9 +27,9 @@ class Member{
     }
 }
 class Teacher extends Member{ 
-    void setTeacherData(String degree, String designationName){ 
+    void setTeacherData(String degree, String designation){ 
         qualification=degree; 
-        designation=designationName; 
+        designationName=designation; 
     } 
 } 
 class Student extends Member{ 
@@ -42,7 +42,7 @@ class Student extends Member{
 } 
 class Main{ 
     public static void main(String[] args){ 
-        String name,department,role,qualification,designation,subject,rollNo,choice; 
+        String name,department,role,qualification,designation,subject,rollNo,userResponse; 
         int id,standardStudying;
         Teacher teacher=new Teacher(); 
         Student student=new Student();  
@@ -74,8 +74,8 @@ class Main{
             student.displayMemberData(); 
         } 
         System.out.println("Acknowledge that you have verified the details by typing Yes"); 
-        choice=sc.nextLine(); 
-        if(choice.equals("Yes")){ 
+        userResponse=sc.nextLine(); 
+        if(userResponse.equals("Yes")){ 
             System.out.println("Thankyou"); 
         } 
         
