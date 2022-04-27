@@ -9,6 +9,7 @@ abstract class Employee{  //This class contains abstract and non-abstract method
         this.employeeId=employeeId;  
         this.basePay=basePay; 
     }
+    abstract void calculateYearlyBonus(double basePay); 
     void calculateSalary(){ 
         dearnessAllowance=0.97*basePay;
         houseRentAllowance=0.10*basePay;
@@ -19,43 +20,52 @@ abstract class Employee{  //This class contains abstract and non-abstract method
         System.out.println("Name: "+employeeName); 
         System.out.println("Designation: "+designation); 
         System.out.println("Employee id: "+employeeId); 
-        System.out.println("The yearlyBonus of Professor is "+yearlyBonus);
+        System.out.println("GrossPay: "+grossPay); 
+        System.out.println("Net Pay:"+netPay); 
+        System.out.println("The yearly bonus of Professor is "+yearlyBonus);
     } 
-    abstract void calculateYearlyBonus(double basePay); 
+    
 }
 class Professor extends Employee{
-    @Override 
-    void calculateYearlyBonus(double basePay){ //Method overriden
+    void calculateYearlyBonus(double basePay){
         yearlyBonus=basePay*0.3;  
     } 
 }   
 class AssociateProfessor extends Employee{  
-    @Override
-    void calculateYearlyBonus(){  //Method Overriden
+    void calculateYearlyBonus(double basePay){  
        yearlyBonus=basePay*0.1; 
     }
     
 } 
 class Main{ 
-    public static void main(String[] args()){ 
+    public static void main(String[] args){ 
         String employeeName,designation; 
         int employeeId; 
         double basePay;
         Scanner sc=new Scanner(System.in);  
-        System.out.println("Welcome"); 
-        System.out.println("Please enter the following details:\n1.Name\n2.Employee Id\n3.Designation\n4.Base Pay"); 
-        employeeName=sc.nextLine(); 
+        System.out.println("Welcome");  
+        System.out.println("Enter your designation: 1.Professor 2.AssociateProfessor");
         designation=sc.nextLine(); 
-        employeeId=sc.nextInt(); 
-        basePay=sc.nextDouble();
-        Professor professorSalary=new Professor();  
-        professorSalary.setEmployeeDetails(employeeName,designation,employeeId,basePay); 
-        professorSalary.calculateYearlyBonus(basePay);
-        professorSalary.calculateSalary(); 
-        AssociateProfessor associateProfessorSalary=new AssociateProfessor(); 
-        associateProfessorSalary.setEmployeeDetails(employeeName,designation,employeeId,basePay); 
-        associateProfessorSalary.calculateYearlyBonus(); 
-        associateProfessorSalary.calculateSalary(); 
-        System.out.println("Thankyou");
+        switch(designation){ 
+            case "Professor":   
+                System.out.println("Please enter the following details:\n1.Name\n2.Employee Id\n4.Base Pay");  
+                employeeName=sc.nextLine(); 
+                employeeId=sc.nextInt(); 
+                basePay=sc.nextDouble();
+                Professor professorSalary=new Professor();  
+                professorSalary.setEmployeeDetails(employeeName,designation,employeeId,basePay); 
+                professorSalary.calculateYearlyBonus(basePay);
+                professorSalary.calculateSalary(); 
+                break;
+            case "AssociateProfessor":
+                employeeName=sc.nextLine();
+                employeeId=sc.nextInt(); 
+                basePay=sc.nextDouble();
+                AssociateProfessor associateProfessorSalary=new AssociateProfessor(); 
+                associateProfessorSalary.setEmployeeDetails(employeeName,designation,employeeId,basePay); 
+                associateProfessorSalary.calculateYearlyBonus(basePay); 
+                associateProfessorSalary.calculateSalary(); 
+                break; 
+        } 
     } 
 }
