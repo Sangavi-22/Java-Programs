@@ -1,5 +1,5 @@
 import java.util.*; 
-class createBankAccount{  
+class CreateBankAccount{  
     private String userName,address,email,dateOfBirth,nomineeName; //data hiding 
     private long aadhaarNum,mobileNum;
     public void setUserDetails(String userName,String address,String email,String dateOfBirth,String nomineeName,long aadhaarNum,long mobileNum){  
@@ -30,7 +30,7 @@ class Main{
         nomineeName=sc.nextLine(); 
         aadhaarNum=Long.parseLong(sc.nextLine());
         mobileNum=Long.parseLong(sc.nextLine()); 
-        createBankAccount newAccount=new createBankAccount(); 
+        CreateBankAccount newAccount=new CreateBankAccount(); 
         newAccount.setUserDetails(userName,address,email,dateOfBirth,nomineeName,aadhaarNum,mobileNum); 
         newAccount.displayMessage(); 
         //System.out.println(newAccount.userName);//This will generate an error since private members are accessible only in its own class
