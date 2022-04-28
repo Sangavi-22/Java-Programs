@@ -1,43 +1,39 @@
 import java.util.*; 
-interface FixedDeposit{ 
-    default void getRateOfInterest(){  
-        System.out.println(" The rate of interest is 5.20%");
+class CreateBankAccount{  
+    private String userName,address,email,dateOfBirth,nomineeName; //data hiding 
+    private long aadhaarNum,mobileNum;
+    public void setUserDetails(String userName,String address,String email,String dateOfBirth,String nomineeName,long aadhaarNum,long mobileNum){  
+        this.userName=userName;
+        this.address=address;
+        this.email=email;
+        this.dateOfBirth=dateOfBirth; 
+        this.nomineeName=nomineeName; 
+        this.aadhaarNum=aadhaarNum; 
+        this.mobileNum=mobileNum; 
     } 
+    public void displayMessage(){  
+        System.out.println("Your bank account have been created.Your credit card while arrive at your address given by you within 2 days");  
+        System.out.println("Thankyou for using our service");
+    }
 } 
-interface RecurringDeposit{ 
-    default void getRateOfInterest(){   
-        System.out.println("The rate of interest is 4.40%"); 
-    } 
-} 
-class DepositType implements FixedDeposit,RecurringDeposit{   
-    String userName,savingsType; 
-    private long existingaccNum;
-    public void getRateOfInterest(){ 
-        if(savingsType.equals("FixedDeposit")){ 
-            FixedDeposit.super.getRateOfInterest(); 
-        } 
-        else{ 
-            RecurringDeposit.super.getRateOfInterest(); 
-        } 
-    } 
-    public void getUserDetails(String userName, String savingsType,long existingAccNum){ 
-        this.userName=userName;  
-        this.savingsType=savingsType; 
-        this.existingAccNum=existingAccNum; 
-    } 
-} 
-class Main{
-    public static void main(String [] args){   
-        String userName,savingsType; 
-        long existingAccNum; 
-        System.out.println("Enter your UserName, savingsType:Fixed or Recurring Deposit, existing account Number");
-        Scanner sc=new Scanner(System.in); 
+class Main{ 
+    public static void main(String[] args){    
+        String userName,address,email,dateOfBirth,nomineeName; 
+        long aadhaarNum,mobileNum;
+        Scanner sc=new Scanner(System.in);  
+        System.out.println("Welcome to our banking services"); 
+        System.out.println("Enter your name, address, email, date of birth, Nominee Name, aadhaarNumber, mobile Num");
         userName=sc.nextLine(); 
-        savingsType=sc.nextLine(); 
-        existingAccNum=Long.parseLong(sc.nextLine());  
-        DepositType depositType=new DepositType(); 
-        depositType.getUserDetails(userName,savingsType,existingAccNum); 
-        depositType.getRateOfInterest(); 
+        address=sc.nextLine(); 
+        email=sc.nextLine();   
+        dateOfBirth=sc.nextLine();  
+        nomineeName=sc.nextLine(); 
+        aadhaarNum=Long.parseLong(sc.nextLine());
+        mobileNum=Long.parseLong(sc.nextLine()); 
+        CreateBankAccount newAccount=new CreateBankAccount(); 
+        newAccount.setUserDetails(userName,address,email,dateOfBirth,nomineeName,aadhaarNum,mobileNum); 
+        newAccount.displayMessage(); 
+        //System.out.println(newAccount.userName);//This will generate an error since private members are accessible only in its own class
+        
     }
 }
-   
