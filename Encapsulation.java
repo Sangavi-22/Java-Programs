@@ -33,7 +33,6 @@ class Main{
         CreateBankAccount newAccount=new CreateBankAccount(); 
         newAccount.setUserDetails(userName,address,email,dateOfBirth,nomineeName,aadhaarNum,mobileNum); 
         newAccount.displayMessage(); 
-        //System.out.println(newAccount.userName);//This will generate an error since private members are accessible only in its own class
         
     }
 }
