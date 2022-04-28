@@ -20,7 +20,7 @@ class DepositType implements FixedDeposit,RecurringDeposit{
             RecurringDeposit.super.getRateOfInterest(); 
         } 
     } 
-    public void getUserDetails(String userName, String savingsType,long existingaccNum){ 
+    public void setUserDetails(String userName, String savingsType,long existingaccNum){ 
         this.userName=userName;  
         this.savingsType=savingsType; 
         this.existingaccNum=existingaccNum; 
