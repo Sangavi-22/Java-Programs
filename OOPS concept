@@ -1,3 +1,4 @@
+import java.util.*; 
 interface Vehicle{  
     public abstract void getMaxSpeedLimit(); //Abstraction is provided by the interface
     public abstract void setVehicleDetails();
