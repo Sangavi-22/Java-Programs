@@ -43,7 +43,7 @@ class Bike implements Vehicle{
         System.out.println("The seating capacity in "+carName+" is "+seatingCapacity); 
     }
 }
-class Main(){ 
+class Main{ 
     public static void main(String [] args){  
         int wheels,seatingCapacity; 
         String carName,ownerName,carNumber,bikeName,bikeNumber;
@@ -51,7 +51,7 @@ class Main(){
         System.out.println("Enter the number of wheels in your vehicle, seating Capacity, vehicle Brand Name, Owner Name, Vehicle Number");
         wheels=sc.nextInt(); 
         seatingCapacity=sc.nextInt();  
-        carName=sc.nextLine
+        carName=sc.nextLine();
         ownerName=sc.nextLine();  
         carNumber=sc.nextLine(); 
         Car carDetails=new Car();  
@@ -72,4 +72,3 @@ class Main(){
         
     } 
 } 
-
