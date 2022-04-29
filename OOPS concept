@@ -1,0 +1,66 @@
+interface Vehicle{  
+    public abstract void getMaxSpeedLimit(); //Abstraction is provided by the interface
+    public abstract void setVehicleDetails();
+}
+class Bike implements Vehicle{   
+    int wheels, seatingCapacity; 
+    String carName;
+    private String ownerName,carNumber;//Encapsulation
+    void getMaxSpeedLimit(){ 
+        //Polymorphism is exhibited using Method Overriding here
+        System.out.println("The maximum speed limit is 60kmph"); 
+    }
+    public void setVehicleDetails(int wheels,int seatingCapacity,String carName,String ownerName,String carNumber){ 
+        this.wheels=wheels; 
+        this.seatingCapacity=seatingCapacity; 
+        this.carName=carName;
+        this.ownerName=ownerName;
+        this.carNumber=carNumber;
+    }
+    public void getVehicleDetails(){ 
+        System.out.println("The number of wheels in "+carName+" is "+wheels); 
+        System.out.println("The seating capacity in "+carName+" is "+seatingCapacity); 
+    }
+}   
+class Car implements Vehicle{ 
+    //implements indicates Inheritance  
+     int wheels, seatingCapacity; 
+    String carName;
+    private String ownerName,carNumber;//Encapsulation
+    @Override
+    void getMaxSpeedLimit(){  
+        System.out.println("The maximum Speed Limit is 80kmph");
+    } 
+    void setNumberOfWheels(int wheels,int seatingCapacity,String carName,String ownerName,String carNumber){ 
+        this.wheels=wheels; 
+        this.seatingCapacity=seatingCapacity; 
+        this.carName=carName;
+        this.ownerName=ownerName;
+        this.carNumber=carNumber;
+    }  
+    public void getVehicleDetails(){ 
+        System.out.println("The number of wheels in "+carName+" is "+wheels); 
+        System.out.println("The seating capacity in "+carName+" is "+seatingCapacity); 
+    }
+}
+class Main(){ 
+    public static void main(String [] args){  
+        int wheels,seatingCapacity; 
+        String carName,ownerName,carNumber;
+        Scanner sc=new Scanner(System.in);  
+        wheels=sc.nextInt(); 
+        seatingCapacity=sc.nextInt();  
+        carName=sc.nextLine
+        ownerName=sc.nextLine();  
+        carNumber=sc.nextLine();  
+        Bike bikeDetails=new Bike(); 
+        bikeDetails.setVehicleDetails(); 
+        bikeDetails.getVehicleDetails();
+        bikeDetails.getMaxSpeedLimit();
+        Car carDetails=new Car(); 
+        carDetails.setVehicleDetails();  
+        carDetails.getVehicleDetails(); 
+        carDetails.getMaxSpeedLimit(); 
+    } 
+} 
+
