@@ -1,6 +1,6 @@
 import java.util.Scanner; 
 class AccountDetails{   
-    String accountNumber="",ifscCode="";
+    String accountNumber,ifscCode;
     AccountDetails(String accountNumber,String ifscCode){  
         this.accountNumber=accountNumber;  
         this.ifscCode=ifscCode; 
@@ -11,12 +11,11 @@ class AccountHolder{
     AccountDetails accountDetails; 
     String userName;
     long customerNumber;
-    AccountHolder(String userName, long customerNumber,AccountDetails accountDetails){ 
+    AccountHolder(String userName, long customerNumber){ 
         this.userName=userName; 
         this.customerNumber=customerNumber; 
-        this.accountDetails = accountDetails;
     }  
-    public void display(){  
+    public void display(AccountDetails accountDetails){  
         System.out.println("Please verify your accountNumber: "+accountDetails.accountNumber); 
         System.out.println("Please enter YES if your accountNumber is correct"); 
         
@@ -34,8 +33,8 @@ class Main{
         userName=sc.nextLine(); 
         customerNumber=Long.parseLong(sc.nextLine()); 
         AccountDetails accountDetails=new AccountDetails(accountNumber,ifscCode); 
-        AccountHolder accountHolder=new AccountHolder(userName,customerNumber,accountDetails);
-        accountHolder.display(); 
+        AccountHolder accountHolder=new AccountHolder(userName,customerNumber);
+        accountHolder.display(accountDetails); 
         choice=sc.nextLine(); 
         if(choice.equals("YES") || choice.equals("yes")){ 
             System.out.println("Thankyou for submiting your details"); 
