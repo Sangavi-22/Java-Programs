@@ -1,0 +1,35 @@
+class college{   
+    String collegeName,collegeAddress,city,state;
+    void setCollegeDetails(String collegeName,String collegeAddress, String city, String state){ 
+        System.out.println("Enter your collegeName,Address,city,state");
+        this.collegeName=sc.nextLine(); 
+        this.collegeAddress=sc.nextLine(); 
+        this.city=sc.nextLine();  
+        this.state=sc.nextLine(); 
+    }
+    
+} 
+class Student{   
+    String name,department; 
+    int yearOfStudy;
+    void setStudentDetails(String name, String department, int yearOfStudy){ 
+        System.out.println("Enter your name,department, year of study");
+        this.name=sc.nextLine();
+        this.department=sc.nextLine();
+        this.yearOfStudy=sc.nextInt();  
+    }
+} 
+class Main{ 
+    public static void main(String[] args){ 
+        String collegeName,collegeAddress,city,state,name,department; 
+        int yearOfStudy; 
+        Scanner sc=new Scanner(System.in);   
+        Student studentDetails=new Student();  
+        College collegeDetails=new College(); 
+        studentDetails.setStudentDetails(sc); 
+        collegeDetails.setCollegeDetails(sc); 
+    } 
+}
+        
+        } 
+}
