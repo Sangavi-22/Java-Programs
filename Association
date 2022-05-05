@@ -28,6 +28,7 @@ class Main{
         Student studentDetails=new Student();  
         College collegeDetails=new College(); 
         studentDetails.setStudentDetails(sc); 
-        collegeDetails.setCollegeDetails(sc); 
+        collegeDetails.setCollegeDetails(sc);  
+        System.out.println(studentDetails.name+" is from "+studentDetails.department+" department in "+collegeDetails.collegeName+" college");
     } 
 }
