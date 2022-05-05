@@ -1,6 +1,7 @@
-class college{   
+import java.util.*;  
+class College{   
     String collegeName,collegeAddress,city,state;
-    void setCollegeDetails(String collegeName,String collegeAddress, String city, String state){ 
+    void setCollegeDetails(Scanner sc){ 
         System.out.println("Enter your collegeName,Address,city,state");
         this.collegeName=sc.nextLine(); 
         this.collegeAddress=sc.nextLine(); 
@@ -12,12 +13,12 @@ class college{
 class Student{   
     String name,department; 
     int yearOfStudy;
-    void setStudentDetails(String name, String department, int yearOfStudy){ 
+    void setStudentDetails(Scanner sc){ 
         System.out.println("Enter your name,department, year of study");
         this.name=sc.nextLine();
         this.department=sc.nextLine();
         this.yearOfStudy=sc.nextInt();  
-    }
+    } 
 } 
 class Main{ 
     public static void main(String[] args){ 
@@ -29,7 +30,4 @@ class Main{
         studentDetails.setStudentDetails(sc); 
         collegeDetails.setCollegeDetails(sc); 
     } 
-}
-        
-        } 
 }
