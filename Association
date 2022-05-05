@@ -5,8 +5,10 @@ class College{
         System.out.println("Enter your collegeName,Address,city,state");
         this.collegeName=sc.nextLine(); 
         this.collegeAddress=sc.nextLine(); 
-        this.city=sc.nextLine();  
+        this.city=sc.nextLine();   
+        sc.nextLine();
         this.state=sc.nextLine(); 
+     
     }
     
 } 
@@ -18,6 +20,7 @@ class Student{
         this.name=sc.nextLine();
         this.department=sc.nextLine();
         this.yearOfStudy=sc.nextInt();  
+        
     } 
 } 
 class Main{ 
@@ -29,6 +32,6 @@ class Main{
         College collegeDetails=new College(); 
         studentDetails.setStudentDetails(sc); 
         collegeDetails.setCollegeDetails(sc);  
-        System.out.println(studentDetails.name+" is from "+studentDetails.department+" department in "+collegeDetails.collegeName+" college");
+        System.out.println(studentDetails.name+" is from "+collegeDetails.city);
     } 
 }
