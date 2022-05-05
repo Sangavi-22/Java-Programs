@@ -33,14 +33,13 @@ class Main{
         Scanner sc=new Scanner(System.in); 
         String bookName,authorName,pageType,pageColor;
         int bookCost,noOfPages;   
-        System.out.println("Enter the book name, author name, book cost, no of pages, page type, page color");
+        System.out.println("Enter the book name, author name, page type, page color, book cost, no of pages");
         bookName=sc.nextLine(); 
         authorName=sc.nextLine();  
+        pageType=sc.nextLine(); 
+        pageColor=sc.nextLine();  
         bookCost=sc.nextInt(); 
         noOfPages=sc.nextInt(); 
-        pageType=sc.nextLine(); 
-        sc.nextLine();
-        pageColor=sc.nextLine(); 
         Book bookDetails=new Book(); 
         Page pageDetails=new Page(); 
         bookDetails.setBookDetails(bookName,authorName,bookCost); 
