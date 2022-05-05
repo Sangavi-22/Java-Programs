@@ -1,7 +1,7 @@
 import java.util.Scanner; 
 class AccountDetails{   
-    String accountNumber,ifscCode;
-    AccountDetails(){  
+    String accountNumber="",ifscCode="";
+    AccountDetails(String accountNumber,String ifscCode){  
         this.accountNumber=accountNumber;  
         this.ifscCode=ifscCode; 
     } 
@@ -11,31 +11,37 @@ class AccountHolder{
     AccountDetails accountDetails; 
     String userName;
     long customerNumber;
-    AccountHolder(String userName, long customerNumber){ 
+    AccountHolder(String userName, long customerNumber,AccountDetails accountDetails){ 
         this.userName=userName; 
         this.customerNumber=customerNumber; 
+        this.accountDetails = accountDetails;
     }  
-    void display(Scanner sc){  
+    public void display(){  
         System.out.println("Please verify your accountNumber: "+accountDetails.accountNumber); 
         System.out.println("Please enter YES if your accountNumber is correct"); 
-        choice=sc.nextLine(); 
-        if(choice.equals("YES") || choice.equals("yes")){ 
-            System.out.println("Thankyou for submiting your details"); 
-        }
+        
+    }
         
 } 
 class Main{ 
     public static void main(String[] args){    
         Scanner sc=new Scanner(System.in);
-        String accountNumber,ifscCode,userName; 
-        long customerNumber; 
+        String accountNumber,ifscCode,userName,choice; 
+        long customerNumber;  
+        System.out.println("Enter your account Number, ifsc Code, username, customer number");
         accountNumber=sc.nextLine(); 
         ifscCode=sc.nextLine(); 
         userName=sc.nextLine(); 
         customerNumber=Long.parseLong(sc.nextLine()); 
         AccountDetails accountDetails=new AccountDetails(accountNumber,ifscCode); 
-        AccountHolder accountHolder=new AccountHolder(userName,customerNumber);
-        AccountHolder.display(sc);
+        AccountHolder accountHolder=new AccountHolder(userName,customerNumber,accountDetails);
+        accountHolder.display(); 
+        choice=sc.nextLine(); 
+        if(choice.equals("YES") || choice.equals("yes")){ 
+            System.out.println("Thankyou for submiting your details"); 
+        }
         
     } 
+    
 } 
+
