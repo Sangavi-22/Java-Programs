@@ -77,8 +77,8 @@ class Main{
         WatchMan watchMan=new WatchMan(name,idNumber);
         Building building=new Building(location,buildingName,noOfFloors);  
         building.room.setRoomDetails(noOfRooms,roomSize,roomColor);
-        building.displayWatchManDetails(watchMan);
         building.displayRoomDetails(); 
+        building.displayWatchManDetails(watchMan);
         
         
     } 
