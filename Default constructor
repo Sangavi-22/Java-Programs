@@ -1,0 +1,24 @@
+class Sample{ 
+    int intValue; 
+    float floatValue; 
+    boolean booleanValue; 
+    String stringValue; 
+    double doubleValue; 
+    long longValue;  
+    Sample referenceValue;
+    void display(){  
+        System.out.println("Int: "+intValue); 
+        System.out.println("float: "+floatValue); 
+        System.out.println("boolen: "+booleanValue); 
+        System.out.println("string: "+stringValue); 
+        System.out.println("double: "+doubleValue); 
+        System.out.println("long: "+longValue);  
+        System.out.println("Reference: "+referenceValue);
+    }
+} 
+class Main{ 
+    public static void main(String[] args){ 
+        Sample sample=new Sample(); 
+        sample.display(); 
+    }
+}
