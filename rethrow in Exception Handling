@@ -1,0 +1,29 @@
+import java.util.Scanner;
+class ExceptionDemo{ 
+    String str;;
+    public void setData(String str){  
+        
+        try{ 
+            this.str=str; 
+            System.out.println(str.charAt(0));
+        } 
+        catch(NullPointerException e){  
+            System.out.println("inside class ExceptionDemo");
+            throw e; 
+        } 
+    }
+            
+}
+class Main{ 
+    public static void main(String args[]){  
+        String str=null;
+        ExceptionDemo exceptionDemo=new ExceptionDemo();  
+        try{ 
+            exceptionDemo.setData(str); 
+        }
+        catch(NullPointerException e){  
+            System.out.println("Rethrown object caught inside class Main");
+            System.out.println("NullPointer Exception occured"+e.getMessage());  
+        } 
+    } 
+}
