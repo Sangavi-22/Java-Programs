@@ -1,6 +1,6 @@
 import java.util.Scanner;
 class ExceptionDemo{ 
-    String str;;
+    String str;
     public void setData(String str){  
         
         try{ 
