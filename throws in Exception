@@ -1,0 +1,20 @@
+class ExceptionDemo{
+    String str;
+    public void setData(String str) throws NullPointerException{   
+        this.str=str;  
+        System.out.println(str.charAt(0)); 
+    }
+}
+class Main{ 
+    public static void main(String args[]){ 
+        String str=null;  
+        ExceptionDemo exceptionDemo=new ExceptionDemo();  
+        try{ 
+            exceptionDemo.setData(str); 
+        }
+        catch(NullPointerException nullPointerExceptionbject){  
+            System.out.println("Inside class Main");
+            System.out.println("NullPointer Exception occured");  
+        } 
+    } 
+}
