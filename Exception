@@ -11,13 +11,13 @@ class Main{
                 fractionMultiplication*=1/arr[i];  
             } 
         } 
-        catch(ArithmeticException obj){  
+        catch(ArithmeticException arithmeticException){  
             System.out.println("Divide by Zero attempted"); 
         } 
-        catch(ArrayIndexOutOfBoundsException obj){ 
+        catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException){ 
             System.out.println("Invalid index value"); 
         } 
-        catch(NoSuchMethodError obj){ 
+        catch(NoSuchMethodError noSuchMethodError){ 
             System.out.println("No such method is defined"); 
         } 
     
