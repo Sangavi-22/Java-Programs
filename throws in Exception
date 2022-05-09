@@ -12,7 +12,7 @@ class Main{
         try{ 
             exceptionDemo.setData(str); 
         }
-        catch(NullPointerException nullPointerExceptionbject){  
+        catch(NullPointerException nullPointerException){  
             System.out.println("Inside class Main");
             System.out.println("NullPointer Exception occured");  
         } 
