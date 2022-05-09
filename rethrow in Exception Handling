@@ -7,9 +7,9 @@ class ExceptionDemo{
             this.str=str; 
             System.out.println(str.charAt(0));
         } 
-        catch(NullPointerException e){  
+        catch(NullPointerException nullPointerException){  
             System.out.println("inside class ExceptionDemo");
-            throw e; 
+            throw nullPointerException; 
         } 
     }
             
@@ -21,9 +21,9 @@ class Main{
         try{ 
             exceptionDemo.setData(str); 
         }
-        catch(NullPointerException e){  
+        catch(NullPointerException nullPointerException){  
             System.out.println("Rethrown object caught inside class Main");
-            System.out.println("NullPointer Exception occured"+e.getMessage());  
+            System.out.println("NullPointer Exception occured"+nullPointerException.getMessage());  
         } 
     } 
 }
