@@ -1,5 +1,4 @@
 import java.util.*; 
-import java.util.*; 
 class ElectricityBill{  
     String consumerName,consumerNumber;  
     int previousMonthReading=0,currentMonthReading=0,units; 
