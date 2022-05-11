@@ -1,1 +1,51 @@
+import java.util.*; 
+interface ContactlessPayments{  
+    public void transferAmount(int amount); 
+}  
+class GooglePay implements ContactlessPayments{  
+    public void transferAmount(int amount){
+        System.out.println("Thankyou for using GooglePay. Amount sent successfully"); 
+    }
+} 
+class PhonePe implements ContactlessPayments{   
+    public void transferAmount(int amount){
+        System.out.println("Thankyou for using PhonePe. Amount was transferred successfully");  
+    }
+} 
+class Shopping{
+	ContactlessPayments contactlessPayments;
+	int amount; 
+	public void setAmount(int amount){ 
+	    this.amount=amount; 
+	} 
+	public void AmountPaymentType(ContactlessPayments contactlessPayments) {
+		this.contactlessPayments = contactlessPayments;
+	}  
+	public void PayAmount() {
+		contactlessPayments.transferAmount(amount);
+	}
+}
 
+public class Main {
+	public static void main(String[] args) {    
+	    Scanner sc=new Scanner(System.in); 
+	    int choice,amount;  
+	    System.out.println("Enter the amount to be payed");  
+	    amount=sc.nextInt();
+	    Shopping shopping=new Shopping(); 
+	    shopping.setAmount(amount);
+	    System.out.println("Enter the payment Type: 1.GooglePay 2.PhonePe 3.Cash");  
+	    choice=sc.nextInt();
+	    switch(choice){ 
+	        case 1: 
+	            GooglePay googlePay=new GooglePay(); 
+	            shopping.AmountPaymentType(googlePay); 
+	            break; 
+	        case 2:
+	            PhonePe phonePe=new PhonePe(); 
+	            shopping.AmountPaymentType(phonePe); 
+	            break; 
+	    } 
+	    shopping.PayAmount(); 
+	}
+}
