@@ -1,1 +1,60 @@
+import java.util.*; 
+interface socialMedia{   
+    public void createProfile(String name,long phoneNumber);
+    public void chatWithFriends(String message);  
+    public void transferAmount(int amount); 
+}  
+class WhatsApp implements socialMedia,UPIPayment{   
+    String name; 
+    long phoneNumber;
+    void createProfile(String name,long phoneNumber){  
+        this.name=name; 
+        this.phoneNumber=phoneNumber;
+    } 
+    void chatWithFriends(String message){  
+        System.out.println(message);
+    }  
+    void transferAmount(int amount){  
+        System.out.println(amount+" transferred successfully");
+    }
+} 
+class Facebook implements socialMedia{  
+    void createProfile(String name,long phoneNumber){  
+        this.name=name; 
+        this.phoneNumber=phoneNumber;
+    } 
+    void chatWithFriends(String message){  
+        System.out.println(message);
+    }  
+     void transferAmount(int amount){ // forcing the Facebook class to implement the interface method 
+        System.out.println("Not Applicable");//voilates Interface segregation Principle
+    }
+} 
+class Main{ 
+    public static void main(String[] args){  
+        String message,name,choice;  
+        int amount;
+        long phoneNumber;  
+        Scanner sc=new Scanner(System.in); 
+        WhatsApp whatsApp=new whatsApp(); 
+        System.out.println("Enter your choice: Chatting or TransferAmount or create a new Profile");
+        choice=sc.nextLine(); 
+        if(choice.equals("Chatting")){ 
+            message=sc.nextLine(); 
+            whatsApp.chatWithFriends(message); 
+        } 
+        else if(choice.equals("TransferAmount")){ 
+            amount=sc.nextInt(); 
+            whatsApp.transferAmount(amount); 
+        } 
+        else if(choice.equals("create a new Profile")){ 
+            name=sc.nextLine(); 
+            phoneNumber=Long.parseLong(sc.nextLine()); 
+            whatsApp.createProfile(name,phoneNumber); 
+        }
+    } 
+}
 
+    
+        
+        
