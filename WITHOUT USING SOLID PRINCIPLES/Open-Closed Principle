@@ -1,1 +1,47 @@
-
+import java.util.*; 
+class GenerateBill{  
+    int units; 
+    double result; 
+    String connectionType;
+    public void setElectricityUnitsValue(int units){ 
+        this.units=units; 
+    }  
+    void calculateBillAmount(String connectionType){  
+        this.connectionType=connectionType;
+        if(connectionType.equals("Domestic")){ 
+            if(units<=100) 
+                result=units*1.00;
+            else if(units<=200)
+                result=(100*1.00)+((units-100)*2.50);
+            else if(units<=500)
+                result=(100*1.00)+(100*2.50)+((units-200)*4.00);
+            else
+                result=(100*1.00)+(100*2.50)+(300*4.00)+((units-500)*6.00);   
+        }   
+        else{  
+            if(units<=100)
+                result= units*2.00;
+            else if(units<=200)
+                result=(100*2.00)+((units-100)*4.50);
+            else if(units<=500)
+                result=(100*2.00)+(100*4.50)+((units-200)*6.00);
+            else
+                result=(100*2.00)+(100*4.50)+(300*6.00)+((units-500)*7.00); 
+        }
+    }
+}  
+class Main{ 
+    public static void main(String args[]){ 
+        Scanner sc=new Scanner(System.in);  
+        int previousMonthReading,currentMonthReading,units;  
+        String connectionType;
+        System.out.println("Enter the previous month reading and current month reading, connection type");
+        previousMonthReading=sc.nextInt(); 
+        currentMonthReading=sc.nextInt();  
+        connectionType=sc.nextLine(); 
+        GenerateBill bill=new GenerateBill(); 
+        bill.setElectricityUnitsValue(previousMonthReading-currentMonthReading); 
+        bill.calculateBillAmount(connectionType); 
+    } 
+} 
+    
