@@ -1,1 +1,53 @@
-
+abstract class GenerateBill{  
+    int units;
+    public void setElectricityUnitsValue(int units){ 
+        this.units=units; 
+    } 
+    public double calculateBillAmount(); 
+}  
+class GenerateDomesticBill extends GenerateBill{  
+    double result;  
+    @Override
+    double calculateBillAmount(){  
+        if(units<=100) 
+            result=units*1.00;
+        else if(units<=200)
+            result=(100*1.00)+((units-100)*2.50);
+        else if(units<=500)
+            result=(100*1.00)+(100*2.50)+((units-200)*4.00);
+        else
+            result=(100*1.00)+(100*2.50)+(300*4.00)+((units-500)*6.00);   
+        return result;
+    } 
+} 
+class GenerateCommercialBill extends GenerateBill{  
+    double result;  
+    @Override
+    double calculateBillAmount(){  
+        if(units<=100)
+            result= units*2.00;
+        else if(units<=200)
+            result=(100*2.00)+((units-100)*4.50);
+        else if(units<=500)
+            result=(100*2.00)+(100*4.50)+((units-200)*6.00);
+       else
+            result=(100*2.00)+(100*4.50)+(300*6.00)+((units-500)*7.00); 
+        return result;
+    }
+} 
+class Main{ 
+    public static void Main(String args[]){ 
+        Scanner sc=new Scanner(System.in);  
+        int previousMonthReading,currentMonthReading,units;  
+        ("Enter the previous month reading and current month reading");
+        previousMonthReading=sc.nextInt(); 
+        currentMonthReading=sc.nextInt(); 
+        GenerateBill bill=new GenerateBill(); 
+        bill.setElectricityUnitsValue(previousMonthReading-currentMonthReading); 
+        GenerateDomesticBill domestic=new GenerateDomesticBill();
+        domestic.calculateBillAmount(); 
+        GenerateCommercialBill commercial=new GenerateCommercialBill();
+        commercial.calculateBillAmount();
+    } 
+} 
+    
