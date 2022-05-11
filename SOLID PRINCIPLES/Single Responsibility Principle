@@ -1,1 +1,55 @@
-
+import java.util.*; 
+import java.util.*; 
+class ConsumerDetails{  
+    String consumerName,consumerNumber; 
+    ConsumerDetails(String consumerName,String consumerNumber){ 
+        this.consumerName=consumerName; 
+        this.consumerNumber=consumerNumber; 
+    } 
+}   
+class ElectricityUnitCalculator{ 
+    int previousMonthReading=0,currentMonthReading=0,units; 
+    ElectricityUnitCalculator(int previousMonthReading,int currentMonthReading){ 
+        this.previousMonthReading=previousMonthReading; 
+        this.currentMonthReading=currentMonthReading;
+        units=currentMonthReading-previousMonthReading;
+    }   
+  
+} 
+class GenerateBill{   
+    
+    double result; 
+    ElectricityUnitCalculator unitValue; 
+    public double calculateBillAmount(ElectricityUnitCalculator unit){  
+        unitValue=unit; 
+        int readings=unitValue.units;
+        if(readings<=100) 
+            result=readings*1.00;
+        else if(readings<=200)
+            result=(100*1.00)+((readings-100)*2.50);
+        else if(readings<=500)
+            result=(100*1.00)+(100*2.50)+((readings-200)*4.00);
+        else
+            result=(100*1.00)+(100*2.50)+(300*4.00)+((readings-500)*6.00);   
+        return result;
+    } 
+} 
+class Main{ 
+    public static void main(String args[]){ 
+        Scanner sc=new Scanner(System.in);  
+        String consumerName,consumerNumber; 
+        int previousMonthReading,currentMonthReading;  
+        System.out.println("Welcome. Please Enter your name, consumer number");
+        consumerName=sc.next(); 
+        consumerNumber=sc.next(); 
+        ConsumerDetails consumer=new ConsumerDetails(consumerName,consumerNumber); 
+        System.err.println("Enter the previous month reading and current month reading");
+        previousMonthReading=sc.nextInt(); 
+        currentMonthReading=sc.nextInt(); 
+        ElectricityUnitCalculator unitCalculator=new ElectricityUnitCalculator(previousMonthReading,currentMonthReading);
+        GenerateBill bill=new GenerateBill(); 
+        double billAmount=bill.calculateBillAmount(unitCalculator); 
+        System.out.println("Your billAmount is: "+billAmount);
+    } 
+} 
+    
