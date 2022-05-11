@@ -1,1 +1,66 @@
-
+import java.util.*; 
+interface Department{ 
+    public void setDepartmentDetails(String departmentName); 
+    public void setDepartmentMemberDetails(String name,int id); 
+    public void setSalaryDetails(int salary);
+}
+class Student implements Department{  
+    String departmentName,name; 
+    int studentId;
+    public void setDepartmentDetails(String departmentName){  
+        this.departmentName=departmentName; 
+    } 
+    public void setDepartmentMemberDetails(String name,int studentId){ 
+        this.name=name; 
+        this.studentId=studentId; 
+    }
+    public void setSalaryDetails(int salary){ //Voilates the Liskov Substitution Principle
+        System.out.println("Not Applicable"); 
+    }
+    
+} 
+class Professor implements Department{  
+    String departmentName,name; 
+    int professorId,salary; 
+    public void setDepartmentDetails(String departmentName){  
+        this.departmentName=departmentName; 
+    } 
+    public void setDepartmentMemberDetails(String name,int professorId){ 
+        this.name=name; 
+        this.professorId=professorId; 
+    }  
+    public void setSalaryDetails(int amount){  
+        this.salary=salary; 
+    }
+        
+} 
+class Main{ 
+    public static void main(String args[]){  
+        Scanner sc=new Scanner(System.in);
+        String name,departmentName,memberType;
+        int id,salary;  
+        System.out.println("Professor or Student"); 
+        memberType=sc.next(); 
+        System.out.println("Enter your department name, your name, your id"); 
+        departmentName=sc.next();
+        name=sc.next(); 
+        id=sc.nextInt();
+        if (memberType.equals("Professor")){  
+            Professor professor=new Professor();  
+            System.out.println("Enter your salary"); 
+            salary=sc.nextInt(); 
+            professor.setDepartmentDetails(departmentName); 
+            professor.setDepartmentMemberDetails(name,id); 
+            professor.setSalaryDetails(salary);
+        }  
+        else{ 
+            Student student=new Student(); 
+            student.setDepartmentDetails(departmentName); 
+            student.setDepartmentMemberDetails(name,id); 
+        } 
+    } 
+} 
+        
+        
+        
+        
