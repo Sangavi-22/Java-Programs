@@ -1,1 +1,64 @@
+import java.util.*; 
+interface SocialMedia{   
+    public void createProfile(String name,long phoneNumber);
+    public void chatWithFriends(String message); 
+}  
+interface UPIPayment{  
+    public void transferAmount(int amount); 
+}   
+class WhatsApp implements SocialMedia,UPIPayment{   
+    String name; 
+    long phoneNumber;
+    public void createProfile(String name,long phoneNumber){  
+        this.name=name; 
+        this.phoneNumber=phoneNumber; 
+        System.out.println("Profile Created successfully");
+    } 
+    public void chatWithFriends(String message){  
+        System.out.println(message);
+    }  
+    public void transferAmount(int amount){  
+        System.out.println(amount+" transferred successfully");
+    }
+} 
+class Facebook implements SocialMedia{   
+    String name; 
+    long phoneNumber;
+    public void createProfile(String name,long phoneNumber){  
+        this.name=name; 
+        this.phoneNumber=phoneNumber;
+        System.out.println("Profile Created successfully");
+    } 
+    public void chatWithFriends(String message){  
+        System.out.println(message);
+    } 
+} 
+class Main{ 
+    public static void main(String[] args){  
+        String message,name,choice;  
+        int amount;
+        long phoneNumber;  
+        Scanner sc=new Scanner(System.in); 
+        WhatsApp whatsApp=new WhatsApp(); 
+        System.out.println("Enter your choice: Chatting or TransferAmount or create a new Profile");
+        choice=sc.nextLine(); 
+        if(choice.equals("Chatting")){  
+            System.out.println("Enter your message");
+            message=sc.nextLine(); 
+            whatsApp.chatWithFriends(message); 
+        } 
+        else if(choice.equals("TransferAmount")){  
+            System.out.println("Enter your amount to be transferred");
+            amount=sc.nextInt(); 
+            whatsApp.transferAmount(amount); 
+        } 
+        else if(choice.equals("create a new Profile")){ 
+            System.out.println("Enter your name, phoneNumber");
+            name=sc.nextLine(); 
+            phoneNumber=Long.parseLong(sc.nextLine()); 
+            whatsApp.createProfile(name,phoneNumber); 
+        }
+    } 
+}
+
 
