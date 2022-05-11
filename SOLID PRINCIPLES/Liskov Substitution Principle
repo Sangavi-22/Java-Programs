@@ -1,64 +1,65 @@
 import java.util.*; 
-interface SocialMedia{   
-    public void createProfile(String name,long phoneNumber);
-    public void chatWithFriends(String message); 
-}  
-interface UPIPayment{  
-    public void transferAmount(int amount); 
-}   
-class WhatsApp implements SocialMedia,UPIPayment{   
-    String name; 
-    long phoneNumber;
-    public void createProfile(String name,long phoneNumber){  
-        this.name=name; 
-        this.phoneNumber=phoneNumber; 
-        System.out.println("Profile Created successfully");
-    } 
-    public void chatWithFriends(String message){  
-        System.out.println(message);
-    }  
-    public void transferAmount(int amount){  
-        System.out.println(amount+" transferred successfully");
-    }
+interface Department{ 
+    public void setDepartmentDetails(String departmentName); 
+    public void setDepartmentMemberDetails(String name,int id);
+}
+interface Salary{  
+    public void setSalaryDetails(int salary);
 } 
-class Facebook implements SocialMedia{   
-    String name; 
-    long phoneNumber;
-    public void createProfile(String name,long phoneNumber){  
+class Student implements Department{  
+    String departmentName,name; 
+    int studentId;
+    public void setDepartmentDetails(String departmentName){  
+        this.departmentName=departmentName; 
+    } 
+    public void setDepartmentMemberDetails(String name,int studentId){ 
         this.name=name; 
-        this.phoneNumber=phoneNumber;
-        System.out.println("Profile Created successfully");
+        this.studentId=studentId; 
+    }
+    
+} 
+class Professor implements Department,Salary{  
+    String departmentName,name; 
+    int professorId,salary; 
+    public void setDepartmentDetails(String departmentName){  
+        this.departmentName=departmentName; 
     } 
-    public void chatWithFriends(String message){  
-        System.out.println(message);
-    } 
+    public void setDepartmentMemberDetails(String name,int professorId){ 
+        this.name=name; 
+        this.professorId=professorId; 
+    }  
+    public void setSalaryDetails(int amount){  
+        this.salary=salary; 
+    }
+        
 } 
 class Main{ 
-    public static void main(String[] args){  
-        String message,name,choice;  
-        int amount;
-        long phoneNumber;  
-        Scanner sc=new Scanner(System.in); 
-        WhatsApp whatsApp=new WhatsApp(); 
-        System.out.println("Enter your choice: Chatting or TransferAmount or create a new Profile");
-        choice=sc.nextLine(); 
-        if(choice.equals("Chatting")){  
-            System.out.println("Enter your message");
-            message=sc.nextLine(); 
-            whatsApp.chatWithFriends(message); 
+    public static void main(String args[]){  
+        Scanner sc=new Scanner(System.in);
+        String name,departmentName,memberType;
+        int id,salary;  
+        System.out.println("Professor or Student"); 
+        memberType=sc.next(); 
+        System.out.println("Enter your department name, your name, your id"); 
+        departmentName=sc.next();
+        name=sc.next(); 
+        id=sc.nextInt();
+        if (memberType.equals("Professor")){  
+            Professor professor=new Professor();  
+            System.out.println("Enter your salary"); 
+            salary=sc.nextInt(); 
+            professor.setDepartmentDetails(departmentName); 
+            professor.setDepartmentMemberDetails(name,id); 
+            professor.setSalaryDetails(salary);
+        }  
+        else{ 
+            Student student=new Student(); 
+            student.setDepartmentDetails(departmentName); 
+            student.setDepartmentMemberDetails(name,id); 
         } 
-        else if(choice.equals("TransferAmount")){  
-            System.out.println("Enter your amount to be transferred");
-            amount=sc.nextInt(); 
-            whatsApp.transferAmount(amount); 
-        } 
-        else if(choice.equals("create a new Profile")){ 
-            System.out.println("Enter your name, phoneNumber");
-            name=sc.nextLine(); 
-            phoneNumber=Long.parseLong(sc.nextLine()); 
-            whatsApp.createProfile(name,phoneNumber); 
-        }
     } 
-}
-
-
+} 
+        
+        
+        
+        
