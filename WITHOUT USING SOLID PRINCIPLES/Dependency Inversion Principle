@@ -10,14 +10,11 @@ class PhonePe{
     }
 } 
 class Shopping{
-	PhonePe phonePe;
+	PhonePe phonePe=new PhonePe();
 	int amount; 
 	public void setAmount(int amount){ 
 	    this.amount=amount; 
-	} 
-	public void AmountPaymentType(PhonePe phonePe) {
-		this.phonePe = phonePe;
-	}  
+	}
 	public void PayAmount() { 
 	    phonePe.transferAmount(amount);
 	}
@@ -31,9 +28,6 @@ public class Main {
 	    amount=sc.nextInt();
 	    Shopping shopping=new Shopping(); 
 	    shopping.setAmount(amount);
-	    System.out.println("Enter the payment Type: 1.GooglePay 2.PhonePe 3.Cash");  
-	    PhonePe phonePe=new PhonePe(); 
-	    shopping.AmountPaymentType(phonePe); 
 	    shopping.PayAmount(); 
 	}
 }
