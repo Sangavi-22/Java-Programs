@@ -1,1 +1,44 @@
+import java.util.*; 
+import java.util.*; 
+class ElectricityBill{  
+    String consumerName,consumerNumber;  
+    int previousMonthReading=0,currentMonthReading=0,units; 
+    double result;
+    ElectricityBill(String consumerName,String consumerNumber,int previousMonthReading,int currentMonthReading){ 
+        this.consumerName=consumerName; 
+        this.consumerNumber=consumerNumber;  
+        this.previousMonthReading=previousMonthReading; 
+        this.currentMonthReading=currentMonthReading;
+        units=currentMonthReading-previousMonthReading;
+    }  
+    public double calculateBillAmount(){  
+        int readings=units;
+        if(readings<=100) 
+            result=readings*1.00;
+        else if(readings<=200)
+            result=(100*1.00)+((readings-100)*2.50);
+        else if(readings<=500)
+            result=(100*1.00)+(100*2.50)+((readings-200)*4.00);
+        else
+            result=(100*1.00)+(100*2.50)+(300*4.00)+((readings-500)*6.00);   
+        return result;
+    } 
+}   
 
+class Main{ 
+    public static void main(String args[]){ 
+        Scanner sc=new Scanner(System.in);  
+        String consumerName,consumerNumber; 
+        int previousMonthReading,currentMonthReading;  
+        System.out.println("Welcome. Please Enter your name, consumer number, previous month reading and current month reading");
+        consumerName=sc.next(); 
+        consumerNumber=sc.next();  
+        previousMonthReading=sc.nextInt(); 
+        currentMonthReading=sc.nextInt(); 
+        ElectricityBill electricityBill=new ElectricityBill(consumerName,consumerNumber,previousMonthReading,currentMonthReading); 
+        System.err.println("Enter the previous month reading and current month reading");
+        double billAmount=electricityBill.calculateBillAmount(); 
+        System.out.println("Your billAmount is: "+billAmount);
+    } 
+} 
+ 
