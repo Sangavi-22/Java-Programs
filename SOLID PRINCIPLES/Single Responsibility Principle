@@ -1,5 +1,4 @@
 import java.util.*; 
-import java.util.*; 
 class ConsumerDetails{  
     String consumerName,consumerNumber; 
     ConsumerDetails(String consumerName,String consumerNumber){ 
@@ -43,7 +42,7 @@ class Main{
         consumerName=sc.next(); 
         consumerNumber=sc.next(); 
         ConsumerDetails consumer=new ConsumerDetails(consumerName,consumerNumber); 
-        System.err.println("Enter the previous month reading and current month reading");
+        System.out.println("Enter the previous month reading and current month reading");
         previousMonthReading=sc.nextInt(); 
         currentMonthReading=sc.nextInt(); 
         ElectricityUnitCalculator unitCalculator=new ElectricityUnitCalculator(previousMonthReading,currentMonthReading);
@@ -52,4 +51,3 @@ class Main{
         System.out.println("Your billAmount is: "+billAmount);
     } 
 } 
-    
