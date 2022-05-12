@@ -18,7 +18,7 @@ class GenerateDomesticBill extends GenerateBill{
             result=(100*1.00)+(100*2.50)+((units-200)*4.00);
         else
             result=(100*1.00)+(100*2.50)+(300*4.00)+((units-500)*6.00);   
-        
+        System.out.println("Your bill Amount is: "+result+" if connection type is Commercial");
     } 
 } 
 class GenerateCommercialBill extends GenerateBill{  
@@ -33,7 +33,7 @@ class GenerateCommercialBill extends GenerateBill{
             result=(100*2.00)+(100*4.50)+((units-200)*6.00);
        else
             result=(100*2.00)+(100*4.50)+(300*6.00)+((units-500)*7.00); 
-        
+        System.out.println("Your bill Amount is: "+result+" if connection type is Domestic");
     }
 } 
 class Main{ 
