@@ -1,0 +1,24 @@
+import java.util.*; 
+class Main{  
+    public static void main(String args[]){ 
+        Scanner sc=new Scanner(System.in); 
+        int N=sc.nextInt(); 
+        char[] arr=new char[N]; 
+        char[] frequencyCount=new char[256];   
+        for(int i=0;i<N;i++){ 
+            arr[i]=sc.next().charAt(0); 
+            frequencyCount[(int)arr[i]]++;
+        }  
+        for(int i=0;i<N;i++){ 
+            if(frequencyCount[(int)arr[i]]>0){ 
+                for(int j=0;j<frequencyCount[(int)arr[i]];j++){  
+                    System.out.print(arr[i]+" ");
+                }  
+                frequencyCount[(int)arr[i]]=0; 
+            } 
+        } 
+      
+        
+        
+    }
+} 
