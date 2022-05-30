@@ -1,0 +1,12 @@
+public class Book {
+    String bookName;
+    int bookCost,bookId,bookedStatus,bookCount;
+    Book(String bookName,int bookCost,int bookId,int bookCount,int bookedStatus){
+        this.bookName=bookName;
+        this.bookCost=bookCost;
+        this.bookId=bookId;
+        this.bookCount=bookCount;
+        this.bookedStatus=bookedStatus;
+    }
+
+}
