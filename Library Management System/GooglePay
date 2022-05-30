@@ -1,0 +1,5 @@
+public class GooglePay implements Payments{
+    public void transferAmount(String fromAccount,int amount){
+        System.out.println("Thank you for using GooglePay. Amount sent successfully");
+    }
+}
