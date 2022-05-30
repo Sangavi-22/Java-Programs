@@ -1,0 +1,122 @@
+import java.util.*;
+import java.util.ArrayList;
+public class Library {
+    Scanner input=new Scanner(System.in);
+    String bookName;
+    LibraryStatus status=LibraryStatus.OPENED;
+    int bookCost,bookId,bookCount,bookedStatus;
+    ArrayList<Book>libraryBooks=new ArrayList<>();
+    Profile profile;
+
+    public void viewBooks(){
+        int i=0;
+        while(i<libraryBooks.size()) {
+            libraryBooks.get(i++);
+        }
+        new Librarian().librarianMenu();
+
+    }
+
+    public void addBooks() {
+        System.out.println("Enter the number of books to be added");
+        int noOfBooksToAdd=input.nextInt();
+        while(noOfBooksToAdd>0) {
+            System.out.println("Enter the title of the book\tcost\tbookId");
+            bookName = input.nextLine();
+            input.nextLine();
+            bookCost = input.nextInt();
+            bookId = input.nextInt();
+            int i = 0;
+            while (i < libraryBooks.size()) {
+                if (libraryBooks.get(i).bookName.equals(bookName)) {
+                    int previousBookedCount=libraryBooks.get(i).bookCount+1;
+                    libraryBooks.set(i,new Book(bookName, bookCost, bookId, previousBookedCount, bookedStatus = 0));
+                    break;
+                } else {
+                    libraryBooks.add(new Book(bookName, bookCost, bookId, bookCount = 0, bookedStatus = 0));
+                }
+            }
+            noOfBooksToAdd--;
+        }
+        System.out.println("Books Added Successfully");
+        new Librarian().librarianMenu();
+    }
+    public void removeBooks() {
+        System.out.println("Enter the number of books to be removed");
+        int noOfBooksToRemove = input.nextInt();
+        while (noOfBooksToRemove>0) {
+            System.out.println("Enter the title of the book to be removed");
+            String bookToBeRemoved = input.nextLine();
+            int i = 0;
+            while (i < libraryBooks.size()) {
+                if (libraryBooks.get(i).bookName.equals(bookToBeRemoved)) {
+                    libraryBooks.remove(i);
+                    break;
+                }
+            }
+            noOfBooksToRemove--;
+        }
+        System.out.println("Books Removed Successfully");
+        new Librarian().librarianMenu();
+    }
+    public void updateTitle(){
+        System.out.println("Enter the number of books to be renamed");
+        int noOfBooksToRenamed = input.nextInt();
+        while (noOfBooksToRenamed>0) {
+            System.out.println("Enter the title of the book to be renamed");
+            String bookToBeRenamed = input.nextLine();
+            input.nextLine();
+            String newBookName = input.nextLine();
+            int i = 0;
+            while (i < libraryBooks.size()) {
+                if (libraryBooks.get(i).bookName.equals(bookToBeRenamed)) {
+                    libraryBooks.set(i,new Book(newBookName, bookCost, bookId, bookCount = 0, bookedStatus = 0));
+                    i++;
+                }
+                noOfBooksToRenamed--;
+            }
+            System.out.println("Books Renamed Successfully");
+            new Librarian().librarianMenu();
+        }
+
+
+    }
+    public void borrowBooks () {
+        String bookToBeBorrowed = input.nextLine();
+        int i = 0;
+        while (i < libraryBooks.size()) {
+            if (libraryBooks.get(i).bookName.equals(bookToBeBorrowed) &&
+                    libraryBooks.get(i).bookedStatus ==0 && libraryBooks.get(i).bookCount>=1) {
+                libraryBooks.set(i,new Book(bookName, bookCost, bookId, bookCount=bookCount-1, bookedStatus = 1));
+                profile.borrowedCount++;
+                break;
+            }
+            else {
+                System.out.println("Book cannot be borrowed");
+            }
+        }
+        System.out.println("Books have been borrowed");
+        new Student().studentMenu();
+
+    }
+    public void returnBooks () {
+        String bookToBeReturned = input.nextLine();
+        int i = 0;
+        while (i < libraryBooks.size()) {
+            if (libraryBooks.get(i).bookName.equals(bookToBeReturned) &&
+                    libraryBooks.get(i).bookedStatus == 1) {
+                libraryBooks.set(i,new Book(bookName, bookCost, bookId, bookCount = 0, bookedStatus = 0));
+                i++;
+                break;
+            }
+            else {
+                System.out.println("Book already present");
+            }
+        }
+        System.out.println("Books returned Successfully");
+        new Student().studentMenu();
+
+    }
+
+}
+
