@@ -1,0 +1,27 @@
+public class PayFine {
+    Scanner input = new Scanner(System.in);
+    int amount = 0;
+
+    void payFine(int amount) {
+        this.amount = amount;
+        System.out.println("1. Pay using card\n2. Pay using googlePay");
+        int choice = input.nextInt();
+        input.nextLine();
+        Payments payment;
+        switch (choice) {
+            case 1:
+                System.out.print("Enter card number: ");
+                String cardNumber = input.nextLine();
+                payment = new Card();
+                payment.transferAmount(cardNumber, amount);
+                break;
+            case 2:
+                System.out.print("Enter GooglePay Id: ");
+                String UpiId = input.nextLine();
+                payment = new GooglePay();
+                payment.transferAmount(UpiId, amount);
+                break;
+
+        }
+    }
+}
