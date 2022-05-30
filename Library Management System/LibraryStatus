@@ -1,0 +1,3 @@
+public enum LibraryStatus {
+    OPENED,CLOSED
+}
