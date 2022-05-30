@@ -1,0 +1,11 @@
+public class Profile {
+    String personName, email;
+    AccountStatus profileStatus;
+    int borrowedCount;
+    void updateProfile(String personName, String email,AccountStatus profileStatus,int borrowedCount){
+        this.personName=personName;
+        this.email=email;
+        this.profileStatus=profileStatus;
+        this.borrowedCount=borrowedCount;
+    }
+}
