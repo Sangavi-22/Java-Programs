@@ -1,0 +1,3 @@
+public interface Payments{
+    void transferAmount(String fromAccount, int amount);
+}
