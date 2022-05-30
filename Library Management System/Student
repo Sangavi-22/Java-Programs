@@ -1,0 +1,25 @@
+import java.util.Scanner;
+public class Student extends Profile{
+    Scanner input = new Scanner(System.in);
+    Library library=new Library();
+    int amount;
+    public void studentMenu() {
+        System.out.println("Welcome Student!");
+        System.out.println("Menu\tBorrow Books\tReturn Books\t Pay Fine\t Update Profile");
+        String userInput = input.nextLine();
+        input.nextLine();
+        switch (userInput) {
+            case "Borrow Books":
+                library.borrowBooks();
+                break;
+            case "Return Books":
+                library.returnBooks();
+                break;
+            case "Pay Fine":
+                PayFine fine=new PayFine();
+                fine.payFine(amount=borrowedCount*50);
+                break;
+
+        }
+    }
+}
