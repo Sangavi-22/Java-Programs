@@ -1,0 +1,63 @@
+
+import java.util.*;
+import java.util.ArrayList;
+public class LoginManagement {
+    HashMap<String, ArrayList<Object>> loginDetails = new HashMap<>();
+    public String userName,password,personName,email;
+    AccountStatus profileStatus;
+    public int borrowedCount;
+    Profile profile=new Profile();
+    Scanner input=new Scanner(System.in);
+    public void LoginDetails(Scanner input){
+        System.out.println("Signup or Login");
+        String userChoice=input.nextLine();
+        switch(userChoice) {
+            case "Signup":
+                ArrayList<Object> userDetails=new ArrayList<>();
+                System.out.println("Enter the new userName and new password");
+                System.out.println("Note that username should start with \"L\" for librarian or \"S\" for Student");
+                System.out.println("Password should be eight characters long and should contain" +
+                        " one uppercase, lowercase character with a symbol");
+                userName=input.nextLine();
+                password=input.nextLine();
+                verifyDetails();
+                System.out.println("Enter your name, email");
+                personName=input.nextLine();
+                email=input.nextLine();
+                profileStatus=AccountStatus.ACTIVE;
+                profile.updateProfile(personName,email,profileStatus,borrowedCount=0);
+                userDetails.add(password);
+                userDetails.add(profile.personName);
+                userDetails.add(profile.email);
+                userDetails.add(profile.profileStatus);
+                userDetails.add(profile.borrowedCount);
+                loginDetails.put(userName,userDetails);
+                System.out.println("Account created successfully");
+            case "Login":
+                System.out.println("Enter the userName and password");
+                userName=input.nextLine();
+                password=input.nextLine();
+                Login();
+                break;
+        }
+    }
+    public void verifyDetails(){
+        if(loginDetails.containsKey(userName)) {
+            System.out.println("Username already exist. Reenter username and password");
+            userName=input.nextLine();
+            password=input.nextLine();
+        }
+
+    }
+    public void Login(){
+        if (Character.toString(userName.charAt(0)).equals("L") && loginDetails.containsKey(userName)){
+            Librarian librarian=new Librarian();
+            librarian.librarianMenu();
+        }
+        else if(Character.toString(userName.charAt(0)).equals("S") && loginDetails.containsKey(userName)){
+            Student student=new Student();
+            student.studentMenu();
+        }
+    }
+
+}
