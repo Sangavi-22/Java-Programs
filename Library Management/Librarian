@@ -1,0 +1,40 @@
+import java.util.*;
+public class Librarian extends Profile {
+    Scanner input = new Scanner(System.in);
+    Library library;
+    public void librarianMenu(Library library) {
+        this.library=library;
+        System.out.println("Welcome Librarian!");
+        System.out.println("Menu\nView Books\tAdd Books\tRemove Books\tUpdate Title\tLogOut");
+        String userInput = input.nextLine();
+        switch (userInput) {
+            case "View Books":
+                library.viewBooks();
+                librarianMenu(library);
+                break;
+            case "Add Books":
+                library.addBooks();
+                librarianMenu(library);
+                break;
+            case "Remove Books":
+                library.removeBooks();
+                librarianMenu(library);
+                break;
+            case "Update Title":
+                library.updateTitle();
+                librarianMenu(library);
+                break;
+            case "Remove User":
+                System.out.println("Enter the userName to remove");
+                String user=input.nextLine();
+                profileStatus=ProfileStatus.INACTIVE;
+                LibraryManagement.removeUser(user);
+                break;
+            case "LogOut":
+                LibraryManagement.logOut();
+                break;
+
+        }
+    }
+}
+
