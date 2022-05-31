@@ -1,0 +1,76 @@
+import java.util.*;
+import java.lang.*;
+
+public class LibraryManagement{
+    Scanner input =new Scanner(System.in);
+    String userName,password;
+    static HashMap<Object,String> loginDetails=new HashMap<>();
+    Book book=new Book();
+    Library library=new Library(book);
+    void manageLogin(){
+        System.out.println("Signup or Login");
+        String choice= input.nextLine();
+        switch(choice) {
+            case "Signup":
+                 createAccount();
+                 break;
+            case "Login":
+                 loginAccount();
+                 break;
+        }
+    }
+    void createAccount(){
+        System.out.println("Enter your new username and new password");
+        System.out.println("Note that password should start with \"L\" for librarian or \"S\" for Student");
+        System.out.println("Password should be eight characters long and should contain" +
+                " one uppercase, lowercase character with a symbol");
+        userName=input.nextLine();
+        input.nextLine();
+        password=input.nextLine();
+        char name=(char)password.charAt(0);
+        if(name == 'L') {
+            Librarian userName = new Librarian();
+            verifyDetails();
+           userName.librarianMenu(library);
+        }
+        else{
+          Student userName = new Student();
+          verifyDetails();
+          userName.studentMenu(library);
+        }
+    }
+    public void verifyDetails(){
+        if(loginDetails.containsKey(userName)) {
+            System.out.println("Username already exist. Reenter username and password");
+            userName=input.nextLine();
+            input.nextLine();
+            password=input.nextLine();
+        }
+        else {
+            loginDetails.put(userName, password);
+        }
+    }
+    void loginAccount(){
+        System.out.println("Enter your userName and password");
+        userName=input.nextLine();
+        input.nextLine();
+        password=input.nextLine();
+        char name=(char)password.charAt(0);
+        if(name =='L' && loginDetails.containsKey(userName)) {
+          Librarian userName = new Librarian();
+          userName.librarianMenu(library);
+        }
+        else{
+           Student userName = new Student();
+           userName.studentMenu(library);
+        }
+    }
+    static void removeUser(String user){
+        loginDetails.remove(user);
+        System.out.println("Account Removed");
+    }
+    static void logOut(){
+        Library.libraryStatus=LibraryStatus.CLOSED;
+        System.out.println("Thank you for using our library. You have been Logged out successfully");
+    }
+}
