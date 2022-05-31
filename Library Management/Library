@@ -1,0 +1,89 @@
+import java.util.*;
+import java.util.ArrayList;
+public class Library{
+    Scanner input=new Scanner(System.in);
+    Book book;
+    ArrayList<Object>bookDetails;
+    HashMap<String,List<Object>> libraryBooks=new HashMap<>();
+    static LibraryStatus libraryStatus=LibraryStatus.OPENED;
+    Library(Book book){
+
+        this.book=book;
+    }
+    public void addBooks() {
+        System.out.println("Enter the number of books to be added");
+        int booksToBeAdded=Integer.parseInt(input.nextLine());
+        while(booksToBeAdded-->0) {
+            book.setbookDetails();
+            if(!(libraryBooks.containsKey(book.bookName))){
+                bookDetails = new ArrayList<>();
+                bookDetails.add(book.authorName);
+                bookDetails.add(book.bookCost);
+                bookDetails.add(book.bookId);
+                bookDetails.add(book.bookedStatus);
+                libraryBooks.put(book.bookName, bookDetails);
+            }
+            booksToBeAdded--;
+        }
+        System.out.println("Books added successfully");
+    }
+    public void removeBooks() {
+        System.out.println("Enter the number of books to be removed");
+        int booksToBeRemoved=Integer.parseInt(input.nextLine());
+        while(booksToBeRemoved-->0) {
+            book.setbookDetails();
+            libraryBooks.remove(book.bookName);
+            booksToBeRemoved--;
+        }
+        System.out.println("Books added successfully");
+
+    }
+    public void viewBooks(){
+        for(String key:libraryBooks.keySet()){
+            System.out.println(key+"="+libraryBooks.get(key));
+        }
+    }
+    public void updateTitle(){
+        System.out.println("Enter the title of the book to be renamed");
+        String bookToBeRenamed=input.nextLine();
+        if(libraryBooks.containsKey(bookToBeRenamed)) {
+            libraryBooks.remove(bookToBeRenamed);
+            bookDetails = new ArrayList<>();
+            book.setbookDetails();
+            bookDetails.add(book.authorName);
+            bookDetails.add(book.bookCost);
+            bookDetails.add(book.bookId);
+            bookDetails.add(book.bookedStatus);
+            libraryBooks.put(book.bookName,bookDetails);
+        }
+    }
+    public void borrowBooks () {
+        System.out.println("Enter the bookDetails of book you want to borrow");
+        book.setbookDetails();
+        book.bookedStatus=1;
+        bookDetails= new ArrayList<>();
+        bookDetails.add(book.authorName);
+        bookDetails.add(book.bookCost);
+        bookDetails.add(book.bookId);
+        bookDetails.add(book.bookedStatus);
+        libraryBooks.replace(book.bookName,bookDetails);
+    }
+    public void returnBooks () {
+        System.out.println("Enter the bookDetails of book you want to return");
+        book.setbookDetails();
+        book.bookedStatus=0;
+        bookDetails= new ArrayList<>();
+        bookDetails.add(book.authorName);
+        bookDetails.add(book.bookCost);
+        bookDetails.add(book.bookId);
+        bookDetails.add(book.bookedStatus);
+        libraryBooks.replace(book.bookName,bookDetails);
+        System.out.println("Books have been returned");
+    }
+}
+
+
+
+
+
+
