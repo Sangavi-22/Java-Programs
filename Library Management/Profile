@@ -1,0 +1,17 @@
+import java.util.*;
+import java.lang.*;
+public class Profile{
+    Scanner input=new Scanner(System.in);
+    String name,email;
+    int id=0;
+    long mobileNum=0;
+    String type;
+    ProfileStatus profileStatus=ProfileStatus.ACTIVE;
+    void setProfileDetails(String type){
+         this.type=type;
+         name=input.nextLine();
+         email=input.nextLine();
+         id=Integer.parseInt(input.nextLine());
+         mobileNum=Long.parseLong(input.nextLine());
+    }
+}
