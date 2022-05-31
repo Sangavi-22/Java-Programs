@@ -1,0 +1,17 @@
+import java.util.*;
+public class Book {
+    Scanner input=new Scanner(System.in);
+    String bookName,authorName;
+    int bookCost,bookedStatus=0,bookId;
+    void setbookDetails(){
+        System.out.println("Enter book name\tauthor name\tbook cost\tbook id");
+        bookName=input.nextLine();
+        input.nextLine();
+        authorName=input.nextLine();
+        input.nextLine();
+        bookCost=Integer.parseInt(input.nextLine());
+        input.nextLine();
+        bookId=Integer.parseInt(input.nextLine());
+    }
+
+}
