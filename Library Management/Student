@@ -1,0 +1,40 @@
+import java.util.Scanner;
+public class Student extends Profile{
+    Scanner input = new Scanner(System.in);
+    Library library;
+    int amount,borrowedCount=0,returnedCount=0;
+    String type="Student";
+    public void studentMenu(Library library) {
+        this.library=library;
+        System.out.println("Welcome Student!");
+        System.out.println("Menu\tBorrow Books\tReturn Books\tPay Fine\tDelete Account\tLogOut");
+        String userInput = input.nextLine();
+        input.nextLine();
+        switch (userInput) {
+            case "Borrow Books":
+                borrowedCount++;
+                library.borrowBooks();
+                studentMenu(library);
+                break;
+            case "Return Books":
+                returnedCount++;
+                library.returnBooks();
+                studentMenu(library);
+                break;
+            case "Pay Fine":
+                PayFine fine=new PayFine();
+                fine.payFine(amount=borrowedCount-returnedCount*50);
+                studentMenu(library);
+                break;
+            case "Delete Account":
+                System.out.println("Enter your userName to delete");
+                String user=input.nextLine();
+                profileStatus=ProfileStatus.INACTIVE;
+                LibraryManagement.removeUser(user);
+                break;
+            case "LogOut":
+                LibraryManagement.logOut();
+                break;
+        }
+    }
+}
