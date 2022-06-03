@@ -1,0 +1,14 @@
+import Library.LibraryOperations;
+import Library.LibraryStatus;
+import LibraryManagementSystem.LibraryManagement;
+public class Main{
+    public static void main(String args[]){
+        if(LibraryOperations.libraryStatus== LibraryStatus.OPENED){
+            LibraryManagement libraryManagement = new LibraryManagement();
+            libraryManagement.manageLogin();
+        }
+        else{
+            System.out.println("Library is closed");
+        }
+    }
+}
