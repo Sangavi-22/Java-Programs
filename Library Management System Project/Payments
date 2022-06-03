@@ -1,0 +1,4 @@
+package Payment;
+public interface Payments {
+    void transferAmount(String accountId, int amount);
+}
