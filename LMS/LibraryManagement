@@ -1,0 +1,148 @@
+import java.util.*;
+import java.lang.*;
+public class LibraryManagement{
+    Scanner input =new Scanner(System.in);
+    private String userName="newuser",password="123";
+    private String name="";
+    private String passkey="";
+    private String userInput="";
+    private String userId="";
+    private static String accountName="";
+    private int id=0;
+
+    static HashMap<Object,String> loginDetails=new HashMap<>();
+    private Admin admin=new Admin();
+    Library library=new Library();
+    void manageLogin() {
+        System.out.println("**********WELCOME TO LIBRARY MANAGEMENT SYSTEM**********\n");
+        System.out.println("1.Signup\n2.Login");
+        int choice = getChoice();
+        switch (choice) {
+            case 1:
+                userName = getUserName();
+                password = getPassword();
+                if(loginDetails.containsKey(userName)) {
+                    System.out.println("User Already Exist. Reenter your details");
+                    userName = getUserName();
+                    password = getPassword();
+                }
+                admin.setUserName(userName);
+                int id = admin.generateId();
+                System.out.println(id);
+                System.out.println("Your Account have been created successfully");
+                loginDetails.put(userName,password);
+                validateDetails(id);
+                break;
+            case 2:
+                userName =getUserName();
+                password=getPassword();
+                loginDetails.put(userName,password);
+                if(loginDetails.containsKey(userName)){
+                     id =getUserId();
+                     validateDetails(id);
+                }
+                break;
+            default:
+                System.out.println("Invalid choice");
+                break;
+        }
+    }
+    public int getChoice() {
+        boolean flag=true;
+        while(flag) {
+            System.out.println("Enter your new choice");
+            userInput = input.nextLine();
+            if(!(validateChoice(userInput))) {
+                System.out.println("Invalid choice");
+            }
+            else {
+                flag = false;
+            }
+        }
+        return Integer.parseInt(userInput);
+    }
+    public boolean validateChoice(String userInput){
+
+        return userInput.matches(  "\\d");
+    }
+    public String getUserName(){
+        boolean flag=true;
+        while(flag) {
+            System.out.println("Enter your new username");
+            System.out.println("Note that your username should start with \"L\" for librarian or \"S\" for Student");
+            name = input.nextLine();
+            if(!(validateUserName(name))) {
+                System.out.println("Invalid username");
+            }
+            else {
+                flag = false;
+            }
+        }
+        return name;
+    }
+    public boolean validateUserName(String name){
+        return name.matches("[L S][a-zA-Z]+");
+    }
+    public String getPassword() {
+        boolean flag=true;
+        while(flag) {
+            System.out.println("Enter your new password");
+            System.out.println("Note: Your password should contain uppercase,lowercase letters,digits ");
+            passkey = input.nextLine();
+            if(!(validatePassword(passkey))) {
+                System.out.println("Invalid password");
+            }
+            else {
+                flag = false;
+            }
+        }
+        return passkey;
+    }
+    boolean validatePassword(String passkey){
+        return passkey.matches("[a-zA-Z]+\\d+");
+    }
+    public int getUserId(){
+        boolean flag=true;
+        while(flag) {
+            System.out.println("Enter your id");
+            userId = input.nextLine();
+            if(!(validateId(userId))) {
+                System.out.println("Invalid id");
+            }
+            else {
+                flag = false;
+            }
+        }
+        return Integer.parseInt(userId);
+    }
+    boolean validateId(String userId){
+        return userId.matches(  "\\d+");
+    }
+    public void validateDetails(int id){
+        LibraryManagement.accountName=userName;
+        if(id>=1 && id<=100) {
+            Librarian userName = new Librarian();
+            userName.getLibrarianAccess(library);
+            userName.librarianMenu();
+        }
+        else if(id>=101 && id<=200) {
+            Student userName = new Student();
+            userName.getStudentAccess(library);
+            userName.studentMenu();
+        }
+        //else part
+
+    }
+    public static void removeUser(String user){
+        loginDetails.remove(user);
+        System.out.println("Account Removed");
+        if(user.equals(LibraryManagement.accountName)) {
+            System.exit(0);
+        }
+    }
+    public static void logOut(){
+        Library.libraryStatus=LibraryStatus.CLOSED;
+        System.out.println("Thank you for using our library. You have been Logged out successfully");
+        new LibraryManagement().manageLogin();
+    }
+}
