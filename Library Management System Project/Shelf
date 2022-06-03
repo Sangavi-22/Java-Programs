@@ -1,0 +1,22 @@
+package Library;
+public class Shelf {
+    private int locationId;
+    private static Shelf shelf;
+    public Shelf() {
+        // constructor of the Shelf class
+    }
+    public static Shelf getInstance() {
+        if( shelf== null) {
+            shelf=new Shelf();
+        }
+        return shelf;
+    }
+    public void setLocationId(){
+
+        locationId=0;
+    }
+    public int getBookLocation(){
+        locationId++;
+        return locationId;
+    }
+}
