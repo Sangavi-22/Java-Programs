@@ -1,0 +1,60 @@
+package Payment;
+import java.util.*;
+public class PayFine {
+    Scanner input = new Scanner(System.in);
+    private String userInput="";
+
+    public void payFine(int amount) {
+        System.out.println("Your amount to be paid is: "+amount);
+        System.out.println("1. Pay using card\n2. Pay using googlePay");
+        int choice = getChoiceFromUser();
+        Payments payment;
+        switch (choice) {
+            case 1:
+                String cardNumber=getAccountId();
+                payment = new Card();
+                payment.transferAmount(cardNumber, amount);
+                break;
+            case 2:
+                String googlePayId = getAccountId();
+                payment= new GooglePay();
+                payment.transferAmount(googlePayId, amount);
+                break;
+
+        }
+    }
+    public int getChoiceFromUser() {
+        boolean flag=true;
+        while(flag) {
+            System.out.println("Enter your choice");
+            userInput = input.nextLine();
+            if(!(validateUserChoice(userInput))) {
+                System.out.println("Invalid choice");
+            }
+            else {
+                flag = false;
+            }
+        }
+       return Integer.parseInt(userInput);
+    }
+    public boolean validateUserChoice(String userInput){
+        return userInput.matches("\\d");
+    }
+    public String getAccountId(){
+        boolean flag=true;
+        while(flag) {
+            System.out.println("Enter your id");
+            userInput = input.nextLine();
+            if(!(validateAccountId(userInput))) {
+                System.out.println("Invalid choice");
+            }
+            else {
+                flag = false;
+            }
+        }
+        return userInput;
+    }
+   public boolean validateAccountId(String userInput){
+        return userInput.matches("[0-9]+");
+   }
+}
