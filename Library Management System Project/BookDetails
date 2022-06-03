@@ -1,0 +1,89 @@
+package Book;
+import Library.Shelf;
+import Validation.ValidateInput;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class BookDetails {
+    Scanner input=new Scanner(System.in);
+    public String bookName="";
+    private String name="",author="",cost="";
+    private int c=0;
+    ArrayList<String>authorsNames;
+    private int bookCost=0,bookCount=0,bookId;
+    private Shelf shelf=new Shelf();
+    ValidateInput validate=new ValidateInput();
+    public void setBookDetails(){
+        bookName=getBookName();
+        bookCost=getBookCost();
+        bookCount=updateBookCount();
+        getAuthorName();
+    }
+    public void getBookDetails(){
+        System.out.println("Book Name: "+bookName);
+        System.out.println("Book Cost: "+bookCost);
+        System.out.println("Book count: "+bookCount);
+        System.out.println("Author Names: ");
+        int i=1;
+        for(String names:authorsNames) {
+            System.out.println(i + ". " + names);
+            i = i + 1;
+        }
+    }
+    public String getBookName() {
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter the new title of the book");
+            name = input.nextLine();
+            if (!(validate.validateBookName(name))) {
+                System.out.println("Invalid book name");
+            } else {
+                flag = false;
+            }
+        }
+        return name;
+    }
+    public int updateBookCount() {
+        return bookCount++;
+    }
+    public int getBookCost(){
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter book Cost");
+            cost = input.nextLine();
+            if (!(validate.validateBookCost(cost))) {
+                System.out.println("Invalid cost");
+            } else {
+                flag = false;
+            }
+        }
+        return Integer.parseInt(cost);
+    }
+    public void getAuthorName(){
+        ArrayList<String> authorsNames = new ArrayList<>();
+        boolean flag=true;
+        while (flag) {
+            System.out.println("Enter the total number of authors");
+            String userChoice =input.nextLine();
+            if (!(validate.validateUserChoice(userChoice))) {
+                System.out.println("Invalid choice");
+            } else {
+                flag = false;
+            }
+            c=Integer.parseInt(userChoice);
+        }
+        while (c > 0) {
+            boolean open=true;
+            while (open) {
+                System.out.println("Enter the name of authors");
+                author=input.nextLine();
+                if (!(validate.validateAuthorName(author))) {
+                    System.out.println("Invalid name");
+                } else {
+                    authorsNames.add(author);
+                    open = false;
+                }
+            }
+            c=c-1;
+        }
+    }
+}
