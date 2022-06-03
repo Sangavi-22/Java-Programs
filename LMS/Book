@@ -1,0 +1,110 @@
+import java.util.*;
+
+public class Book {
+    Scanner input=new Scanner(System.in);
+    public String bookName="";
+    private String name="",author="",cost="";
+    private int c=0;
+    ArrayList<String>authorsNames;
+    ArrayList<Object> bookDetails=new ArrayList<>();
+    private int bookCost=0,bookCount=1,bookLocation=0;
+    BookLocation location=new BookLocation();
+    public void setBookDetails(){
+        bookName=getBookName();
+        bookCost=getBookCost();
+        getAuthorName();
+        location.setBookLocationId();
+        bookLocation=location.getBookLocationId();
+    }
+    public String getBookName() {
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter the new title of the book");
+            name = input.nextLine();
+            if (!(validateBookName(name))) {
+                System.out.println("Invalid book name");
+            } else {
+                flag = false;
+            }
+        }
+        return name;
+    }
+    public boolean validateBookName(String name){
+        return name.matches("^[A-Za-z0-9\\s\\-_,\\.;:()]+$");
+    }
+    public int getBookCost(){
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter book Cost");
+            cost = input.nextLine();
+            if (!(validateBookCost(cost))) {
+                System.out.println("Invalid cost");
+            } else {
+                flag = false;
+            }
+        }
+        return Integer.parseInt(cost);
+    }
+    boolean validateBookCost(String cost){
+        return cost.matches("^[0-9 -]+$");
+    }
+    public void getAuthorName(){
+        ArrayList<String> authorsNames = new ArrayList<>();
+        boolean flag=true;
+        while (flag) {
+            System.out.println("Enter the total number of authors");
+            String choice =input.nextLine();
+            if (!(validateChoice(choice))) {
+                System.out.println("Invalid choice");
+            } else {
+                flag = false;
+            }
+            c=Integer.parseInt(choice);
+        }
+        while (c > 0) {
+            boolean open=true;
+            while (open) {
+                System.out.println("Enter the name of authors");
+                author=input.nextLine();
+                if (!(validateAuthorName(author))) {
+                    System.out.println("Invalid name");
+                } else {
+                    authorsNames.add(author);
+                    open = false;
+                }
+            }
+            c=c-1;
+
+        }
+    }
+    public boolean validateChoice(String choice) {
+        return choice.matches(  "\\d+");
+    }
+    public boolean validateAuthorName(String author) {
+        return author.matches("[A-Za-z0-9.\\s]+");
+    }
+
+    public void setBookCount(String action) {
+        if (action.equals("Borrow")) {
+            bookCount=bookCount-1;
+        } else {
+            bookCount=bookCount+1;
+        }
+    }
+
+    public void createBook(){
+        bookDetails=new ArrayList<Object>();
+        bookDetails.add(bookCost);
+        bookDetails.add(bookCount);
+        bookDetails.add(authorsNames);
+        bookDetails.add(bookLocation);
+    }
+    public int getBookCount() {
+        return bookCount;
+    }
+    public void updateBookDetails(int count) {
+    bookDetails.set(1, count);
+    }
+
+}
+
