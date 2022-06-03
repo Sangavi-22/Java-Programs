@@ -1,0 +1,137 @@
+import java.util.*;
+public class Library{
+    Scanner input=new Scanner(System.in);
+    private String name="",choice="";
+    HashMap<String, List<Object>>libraryBooks=new HashMap<>();
+    static LibraryStatus libraryStatus=LibraryStatus.OPENED;
+    Book book=new Book();
+    public void viewBooks() {
+        for(String key:libraryBooks.keySet()){
+            System.out.println(key+"="+libraryBooks.get(key));
+        }
+    }
+    public void addBooks() {
+        int booksToBeAdded=getNoOfBooks();
+        while(booksToBeAdded>0) {
+            book.setBookDetails();
+            book.createBook();
+            if(!(libraryBooks.containsKey(book.bookName))){
+                libraryBooks.put(book.bookName,book.bookDetails);
+                System.out.println("Book added successfully");
+            }
+            else{
+                List<Object>sampleList;
+                sampleList = libraryBooks.get(book.bookName);
+                int count=(int)sampleList.get(1)+1;
+                book.updateBookDetails(count);
+                libraryBooks.remove(book.bookName);
+                libraryBooks.put(book.bookName, book.bookDetails);
+            }
+            booksToBeAdded--;
+        }
+    }
+    public void removeBooks() {
+        System.out.println("Enter the number of books to be removed");
+        int booksToBeRemoved=Integer.parseInt(input.nextLine());
+        while(booksToBeRemoved>0) {
+            book.setBookDetails();
+            if(libraryBooks.containsKey(book.bookName)) {
+                libraryBooks.remove(book.bookName);
+            }
+            else {
+                System.out.println("Book not found");
+            }
+            booksToBeRemoved--;
+        }
+
+    }
+    public int getNoOfBooks() {
+        boolean flag=true;
+        while(flag) {
+            System.out.println("Enter the number of Books");
+            choice = input.nextLine();
+            if (!(validateNoOFBooks(choice))) {
+                System.out.println("Invalid input");
+            } else {
+                flag = false;
+            }
+        }
+        return Integer.parseInt(choice);
+    }
+    public boolean validateNoOFBooks(String choice) {
+        return choice.matches(  "\\d");
+    }
+    public void searchBook() {
+        System.out.println("Enter the bookDetails to be searched");
+        String bookToBeSearched=getBookToBeSearched();
+        if(libraryBooks.containsKey(bookToBeSearched)) {
+            int location=(int)libraryBooks.get(bookToBeSearched).get(3);
+            System.out.println("Book found at "+location+" location");
+        }
+        else {
+            System.out.println("Invalid bookName");
+        }
+    }
+    public String getBookToBeSearched() {
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter the title of the book");
+            name = input.nextLine();
+            if (!(validateName(name))) {
+                System.out.println("Invalid book name");
+            } else {
+                flag = false;
+            }
+        }
+        return name;
+    }
+    public void updateTitle(){
+        System.out.println("Enter the book to be renamed");
+        String bookToBeRenamed=getBookToBeRenamed();
+        if(libraryBooks.containsKey(bookToBeRenamed)) {
+            libraryBooks.remove(bookToBeRenamed);
+            book.setBookDetails();
+            book.createBook();
+            libraryBooks.put(book.bookName,book.bookDetails);
+        }
+    }
+    public String getBookToBeRenamed() {
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter the title of the book");
+            name = input.nextLine();
+            if (!(validateName(name))) {
+                System.out.println("Invalid book name");
+            } else {
+                flag = false;
+            }
+        }
+        return name;
+    }
+    boolean validateName(String name){
+        return name.matches("[a-zA-Z]*");
+    }
+    public void borrowBooks () {
+        System.out.println("Enter the bookDetails of book you want to borrow");
+        book.setBookDetails();
+        if(book.getBookCount()>0) {
+            book.setBookCount("Borrow");
+            book.createBook();
+            libraryBooks.replace(book.bookName, book.bookDetails);
+            System.out.println("Books have been borrowed");
+        }
+    }
+    public void returnBooks () {
+        System.out.println("Enter the bookDetails of book you want to return");
+        book.setBookDetails();
+        book.setBookCount("Return");
+        libraryBooks.remove(book.bookName);
+        libraryBooks.put(book.bookName,book.bookDetails);
+        System.out.println("Books have been returned");
+    }
+}
+
+
+
+
+
