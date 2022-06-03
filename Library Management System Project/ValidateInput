@@ -1,0 +1,43 @@
+package Validation;
+public class ValidateInput {
+    public boolean validateUserChoice(String userChoice) {
+        return userChoice.matches("\\d");
+    }
+    public boolean validateUserName(String name){
+
+        return name.matches("[L S][a-zA-Z]+");
+    }
+    public boolean validatePassword(String passkey){
+        return passkey.matches("[a-zA-Z]+\\d+");
+    }
+    public boolean validateId(String userId){
+        return userId.matches(  "\\d+");
+    }
+    public boolean validateBookName(String name) {
+        return name.matches("^[A-Za-z0-9\\s-_,.;:()]+$");
+    }
+    public boolean validateBookCost(String cost){
+        return cost.matches("^[\\d]+$");
+    }
+    public boolean validateAuthorName(String author) {
+        return author.matches("[A-Za-z0-9.\\s]+");
+    }
+    public boolean validateProfileName(String choice){
+        return choice.matches("[a-z A-Z]+|[a-z A-Z]+\\s[a-z A-Z]+");
+    }
+    public boolean validateEmail(String choice){
+        return choice.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+    }
+    public boolean validateMobileNum(String choice){
+        return choice.matches("[0-9]{10}");
+    }
+    public boolean validateNoOfBooks(String choice){
+        return choice.matches("\\d+");
+    }
+    public boolean validateBookId(String userInput){
+        return userInput.matches("\\d+");
+    }
+    public boolean validateAddress(String inputGiven){
+        return inputGiven.matches("[A-Z a-z]+");
+    }
+}
