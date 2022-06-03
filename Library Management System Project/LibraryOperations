@@ -1,0 +1,102 @@
+package Library;
+import Book.BookDetails;
+import Validation.ValidateInput;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class LibraryOperations{
+    Scanner input=new Scanner(System.in);
+    public static LibraryStatus libraryStatus=LibraryStatus.OPENED;
+    HashMap<Integer, BookDetails>libraryBooks=new HashMap<>();
+    ValidateInput validate=new ValidateInput();
+    Shelf shelf=new Shelf();
+    private int noOfBooks=0,id;
+    private String name="";
+    public void viewBooks(){
+        for(int key:libraryBooks.keySet()) {
+            BookDetails object = libraryBooks.get(key);
+            object.getBookDetails();
+        }
+    }
+    public void addBooks(){
+        System.out.println("Enter the number of books to be added");
+        noOfBooks=getNoOfBooks();
+        while(noOfBooks>0) {
+            BookDetails book=new BookDetails();
+            book.setBookDetails();
+            libraryBooks.put(shelf.getBookLocation(),book);
+            noOfBooks--;
+        }
+    }
+    public void removeBooks(){
+        System.out.println("Enter the number of books to be removed");
+        noOfBooks=getNoOfBooks();
+        while(noOfBooks>0) {
+            id=getBookId();
+            libraryBooks.remove(id);
+            noOfBooks--;
+        }
+    }
+    public void updateTitle(){
+        System.out.println("Enter the title of the book to rename"); 
+        String name=getName();
+        for(int key:libraryBooks.keySet()) {
+            BookDetails object=libraryBooks.get(key);
+            if(object.bookName.equals(name)) {
+                object.bookName=name;
+            }
+            else {
+                System.out.println("Book not found");
+            }
+        }
+    } 
+    public void searchBook(){ 
+        //Implementation of searchBooks
+    }
+    public void borrowBooks(){ 
+        //Implementation of borrowBooks
+    }
+    public void returnBooks(){
+        //implementation of returnBooks
+    } 
+    public String getName(){
+        String userChoice=""; 
+        while(true) {
+            System.out.println("Enter the book name");
+            userChoice = input.nextLine();
+            if (!(validate.validateBookName(userChoice))) { 
+                System.out.println("Invalid book name"); 
+            } else {
+                break;
+            }
+        } 
+        return userChoice;
+            
+    }
+    public int getNoOfBooks() {
+        String totalNumberOfBooks="";
+        while (true) {
+            System.out.println("Enter the number of books");
+            totalNumberOfBooks = input.nextLine();
+            if (!(validate.validateNoOfBooks(totalNumberOfBooks))) {
+                System.out.println("Invalid input");
+            } else {
+                break;
+            }
+        }
+        return Integer.parseInt(totalNumberOfBooks);
+    }
+    public int getBookId(){
+        String userInput="";
+        while(true) {
+            System.out.println("Enter the id of the book to remove");
+            userInput = input.nextLine();
+            if (!(validate.validateBookId(userInput))) {
+                System.out.println("Invalid id");
+            } else {
+                break;
+            }
+        }
+        return Integer.parseInt(userInput);
+    }
+}
