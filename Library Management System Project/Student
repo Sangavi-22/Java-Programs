@@ -1,0 +1,84 @@
+package Profile;
+import Library.LibraryOperations;
+import LibraryManagementSystem.LibraryManagement;
+import Payment.PayFine;
+import java.util.Scanner;
+public class Student extends ProfileDetails {
+    Scanner input = new Scanner(System.in);
+    private int borrowedCount=0,returnedCount=0;
+    private String userChoice="";
+    private LibraryOperations library;
+    Validation.ValidateInput validate=new Validation.ValidateInput();
+    public void getStudentAccess(LibraryOperations library ){
+        this.library=library;
+    }
+    public void studentMenu() {
+        System.out.println("********************Welcome Student!********************");
+        System.out.println("Student Menu: \n1.View Books\t2.Borrow Books\t3.Return Books\t4.Search Books\t5.Pay Fine\t6.View Profile\t7.Delete Account\t8.LogOut");
+        int studentActionToPerform =getStudentActionToPerform();
+        input.nextLine();
+        switch (studentActionToPerform) {
+            case 1:
+                library.viewBooks();
+                studentMenu();
+                break;
+            case 2:
+                borrowedCount++;
+                if(borrowedCount>5) {
+                    System.out.println("You have exceeded the maximum limit of books that can be borrowed");
+                }
+                else {
+                    library.borrowBooks();
+                }
+                studentMenu();
+                break;
+            case 3:
+                returnedCount++;
+                borrowedCount--;
+                library.returnBooks();
+                studentMenu();
+                break;
+            case 4:
+                library.searchBook();
+                studentMenu();
+                break;
+            case 5:
+                PayFine fine=new PayFine();
+                fine.payFine(borrowedCount-returnedCount*50);
+                studentMenu();
+                break;
+            case 6:
+                setProfileDetails();
+                System.out.println(getProfileDetails());
+                studentMenu();
+                break;
+            case 7:
+                System.out.println("Enter your userName to delete");
+                String user=input.nextLine();
+                LibraryManagement.removeUser(user);
+                studentMenu();
+                break;
+            case 8:
+                setProfileStatus();
+                LibraryManagement.logOut();
+                break;
+            default:
+                System.out.println("Invalid choice\n");
+                studentMenu();
+                break;
+        }
+    }
+    public int getStudentActionToPerform(){
+        boolean flag=true;
+        while(flag) {
+            System.out.println("\nPlease enter your choice");
+            userChoice = input.nextLine();
+            if (!(validate.validateUserChoice(userChoice))) {
+                System.out.println("Invalid choice");
+            } else {
+                flag = false;
+            }
+        }
+        return Integer.parseInt(userChoice);
+    }
+}
