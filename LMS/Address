@@ -1,0 +1,34 @@
+import java.util.*;
+public class Address {
+    Scanner input=new Scanner(System.in);
+    private String street="",city="",state="",country="",inputGiven="";
+    public void setAddressDetails(){
+        System.out.println("Enter the street name");
+        street=getStringValue();
+        System.out.println("Enter the city name");
+        city=getStringValue();
+        System.out.println("Enter the state name");
+        state=getStringValue();
+        System.out.println("Enter the country name");
+        country=getStringValue();
+    }
+    public String getAddressDetails(){
+        return street+","+city+","+state+","+country;
+    }
+    public String getStringValue(){
+        boolean flag=true;
+        while(flag) {
+            inputGiven = input.nextLine();
+            if(!(validateValue(inputGiven))) {
+                System.out.println("Invalid input");
+            }
+            else {
+                flag = false;
+            }
+        }
+        return inputGiven;
+    }
+    public boolean validateValue(String inputGiven){
+        return inputGiven.matches("[A-Z a-z]+");
+    }
+}
