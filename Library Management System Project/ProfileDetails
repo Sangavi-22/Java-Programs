@@ -1,0 +1,66 @@
+package Profile;
+import java.util.*;
+import java.lang.*;
+public class ProfileDetails{
+    Scanner input=new Scanner(System.in);
+    private String name="",email="",choice="";
+    private long mobileNum=0;
+    private ProfileStatus profileStatus=ProfileStatus.ACTIVE;
+    private Validation.ValidateInput validate=new Validation.ValidateInput();
+    public void setProfileDetails(){
+        name=getName();
+        email=getEmail();
+        mobileNum=getMobileNum();
+    }
+    public void setProfileStatus(){
+        if(profileStatus==ProfileStatus.ACTIVE) {
+            profileStatus=ProfileStatus.INACTIVE;
+        }
+        else{
+            profileStatus=ProfileStatus.ACTIVE;
+        }
+    }
+    public String getProfileDetails(){
+        return "Name: "+name+"\nemail: "+email+"\nmobile: "+mobileNum;
+    }
+    public String getName() {
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter your name:");
+            choice = input.nextLine();
+            if (!(validate.validateProfileName(choice))) {
+                System.out.println("Invalid name");
+            } else {
+                flag = false;
+            }
+        }
+        return choice;
+    }
+    public String getEmail(){
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter your email:");
+            choice = input.nextLine();
+            if (!(validate.validateEmail(choice))) {
+                System.out.println("Invalid email");
+            } else {
+                flag = false;
+            }
+        }
+        return choice;
+    }
+
+    public long getMobileNum(){
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter your mobileNum:");
+            choice = input.nextLine();
+            if (!(validate.validateMobileNum(choice))) {
+                System.out.println("Invalid mobile number");
+            } else {
+                flag = false;
+            }
+        }
+        return Long.parseLong(choice);
+    }
+}
