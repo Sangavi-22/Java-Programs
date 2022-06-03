@@ -1,0 +1,29 @@
+import java.util.*;
+public class BookLocation {
+    Scanner input=new Scanner(System.in);
+    private int locationId=0;
+    public void setBookLocationId(){
+        locationId=getLocationId();
+    }
+    public int getLocationId(){
+        boolean flag=true;
+        String choice="";
+        while(flag) {
+            System.out.println("Enter the id of the place where the book can be found");
+            choice=input.nextLine();
+            if (!(validateLocation(choice))) {
+                System.out.println("Invalid location id");
+            } else {
+                flag = false;
+            }
+        }
+        return Integer.parseInt(choice);
+    }
+    public boolean validateLocation(String choice){
+        return choice.matches("\\d+");
+    }
+    public int getBookLocationId(){
+        return locationId;
+    }
+
+}
