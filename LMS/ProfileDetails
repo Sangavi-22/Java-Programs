@@ -1,0 +1,74 @@
+import java.util.*;
+import java.lang.*;
+public class ProfileDetails{
+    Scanner input=new Scanner(System.in);
+    private String name="",email="",choice="";
+    private long mobileNum=0;
+    private ProfileStatus profileStatus=ProfileStatus.ACTIVE;
+
+    public void setProfileDetails(){
+        name=getName();
+        email=getEmail();
+        mobileNum=getMobileNum();
+    }
+    public void setProfileStatus(){
+        if(profileStatus==ProfileStatus.ACTIVE) {
+            profileStatus=ProfileStatus.INACTIVE;
+        }
+        else{
+            profileStatus=ProfileStatus.ACTIVE;
+        }
+    }
+    public String getProfileDetails(){
+        return "Name: "+name+"\nemail: "+email+"\nmobile: "+mobileNum;
+    }
+    public String getName() {
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter your name:");
+            choice = input.nextLine();
+            if (!(validateName(choice))) {
+                System.out.println("Invalid name");
+            } else {
+                flag = false;
+            }
+        }
+        return choice;
+    }
+    public boolean validateName(String choice){
+        return choice.matches("[a-z A-Z]+|[a-z A-Z]+\\s[a-z A-Z]+");
+    }
+    public String getEmail(){
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter your email:");
+            choice = input.nextLine();
+            if (!(validateEmail(choice))) {
+                System.out.println("Invalid email");
+            } else {
+                flag = false;
+            }
+        }
+        return choice;
+    }
+    public boolean validateEmail(String choice){
+        return choice.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+    }
+    public long getMobileNum(){
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter your mobileNum:");
+            choice = input.nextLine();
+            if (!(validateMobileNum(choice))) {
+                System.out.println("Invalid mobile number");
+            } else {
+                flag = false;
+            }
+        }
+        return Long.parseLong(choice);
+    }
+    public boolean validateMobileNum(String choice){
+        return choice.matches("[0-9]{10}");
+    }
+
+}
