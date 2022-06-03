@@ -1,0 +1,73 @@
+package Profile;
+import Library.LibraryOperations;
+import LibraryManagementSystem.LibraryManagement;
+import Validation.ValidateInput;
+import java.util.Scanner;
+public class Librarian extends ProfileDetails {
+    Scanner input = new Scanner(System.in);
+    private String userChoice="";
+    private LibraryOperations library;
+    ValidateInput validate=new ValidateInput();
+    public void getLibrarianAccess(LibraryOperations library){
+        this.library=library;
+    }
+    public void librarianMenu() {
+        System.out.println("********************Welcome Librarian!********************");
+        System.out.println("Librarian Menu:\n1.View Books\t2.Add Books\t3.Remove Books\t4.Search Books\t5.Update Title\t6.View Profile\t7.Remove User\t8.LogOut");
+        int LibrarianActionToPerform = getLibrarianActionToPerform();
+        switch (LibrarianActionToPerform) {
+            case 1:
+                library.viewBooks();
+                librarianMenu();
+                break;
+            case 2:
+                library.addBooks();
+                librarianMenu();
+                break;
+            case 3:
+                library.removeBooks();
+                librarianMenu();
+                break;
+            case 4:
+                library.searchBook();
+                librarianMenu();
+                break;
+            case 5:
+                library.updateTitle();
+                librarianMenu();
+                break;
+            case 6:
+                setProfileDetails();
+                System.out.println(getProfileDetails());
+                librarianMenu();
+                break;
+            case 7:
+                System.out.println("Enter the userName to remove");
+                String user=input.nextLine();
+                LibraryManagement.removeUser(user);
+                librarianMenu();
+                break;
+            case 8:
+                setProfileStatus();
+                LibraryManagement.logOut();
+                break;
+            default:
+               System.out.println("Invalid choice\n");
+               librarianMenu();
+               break;
+        }
+    }
+    public int getLibrarianActionToPerform(){
+        boolean flag=true;
+        while(flag) {
+            System.out.println("\nPlease enter your choice");
+            userChoice = input.nextLine();
+            if (!(validate.validateUserChoice(userChoice))) {
+                System.out.println("Invalid choice");
+            } else {
+                flag = false;
+            }
+        }
+        return Integer.parseInt(userChoice);
+    }
+}
