@@ -3,11 +3,11 @@ import LibraryManagement.Library;
 import LoginManagement.LoginOperations;
 import Validation.ValidateInput;
 import java.util.Scanner;
-public class Librarian extends Profile {
+public class LibrarianProfile extends Profile {
     private Library library;
     ValidateInput validate=new ValidateInput();
     Scanner input = new Scanner(System.in);
-    public Librarian(){
+    public LibrarianProfile(){
         this.setProfileDetails();
         this.setProfileStatus();
     }
