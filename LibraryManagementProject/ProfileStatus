@@ -1,4 +1,0 @@
-package ProfileManagement;
-public enum ProfileStatus {
-    ACTIVE, INACTIVE
-}
