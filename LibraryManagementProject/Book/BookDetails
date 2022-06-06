@@ -1,0 +1,64 @@
+package Book;
+import Validation.ValidateInput;
+import java.util.*;
+public class BookDetails {
+    private int bookCost;
+    private String bookName,publisherName;
+    ValidateInput validate=new ValidateInput();
+    Scanner input=new Scanner(System.in);
+    public void setBookDetails(){
+        this.bookName=getBookName();
+        this.publisherName=getPublicationName();
+        this.bookCost=getBookCost();
+    }
+    public void getBookDetails(){
+        System.out.println("Title of the book: "+this.bookName);
+        System.out.println("Published by :"+this.publisherName);
+        System.out.println("Cost of the book: "+this.bookCost);
+    }
+    public String getBookNameForComparing(){
+        return this.bookName;
+    }
+
+    public String getBookName(){
+        String inputBookName;
+        while(true) {
+            System.out.println("Enter the title of the book");
+            inputBookName = input.nextLine();
+            if (!(validate.validateBookName(inputBookName))) {
+                System.out.println("Invalid title");
+            } else {
+                break;
+            }
+        }
+        return inputBookName;
+    }
+    public String getPublicationName(){
+        String inputPublisherName;
+        while(true) {
+            System.out.println("Enter the name of the publisher");
+            inputPublisherName = input.nextLine();
+            if (!(validate.validatePublisherName(inputPublisherName))) {
+                System.out.println("Invalid publication name");
+            }
+            else {
+                break;
+            }
+        }
+        return inputPublisherName;
+    }
+    public int getBookCost(){
+        String inputBookCost;
+        while(true) {
+            System.out.println("Enter the cost of the book");
+            inputBookCost = input.nextLine();
+            if (!(validate.validateBookCost(inputBookCost))) {
+                System.out.println("Invalid cost value");
+            } else {
+                break;
+            }
+        }
+        return Integer.parseInt(inputBookCost);
+    }
+
+}
