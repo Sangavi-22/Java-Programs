@@ -38,7 +38,6 @@ public class LoginOperations {
             case 2:
                 userName =getUserName();
                 password=getPassword();
-                loginDetails.put(userName,password);
                 if(loginDetails.containsKey(userName)){
                     id =getUserId();
                     validateDetails(id);
@@ -97,7 +96,7 @@ public class LoginOperations {
     }
     public String getUserName(){
         while(true) {
-            System.out.println("Enter your new username");
+            System.out.println("Enter your username");
             name = input.nextLine();
             if(!(validate.validateUserAccountName(name))) {
                 System.out.println("Invalid username");
@@ -110,7 +109,7 @@ public class LoginOperations {
     }
     public String getPassword() {
         while(true) {
-            System.out.println("Enter your new password");
+            System.out.println("Enter your password");
             System.out.println("Note: Your password should contain uppercase,lowercase letters,digits ");
             passkey = input.nextLine();
             if(!(validate.validatePassword(passkey))) {
