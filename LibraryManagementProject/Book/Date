@@ -1,0 +1,32 @@
+package Book;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+public class Date
+{
+    private LocalDate returnedDate,issueDate,dueDate;
+    private long difference;
+    public void setReturnedDate() {
+        this.returnedDate =LocalDate.now();
+    }
+    public void setBookIssueDate(){
+        this.issueDate=LocalDate.now();
+    }
+    public void setBookReturnDate(){
+        this.dueDate=LocalDate.now().plusDays(20);
+    }
+    public void getIssueDate(){
+        System.out.println("Your issued date is: "+this.issueDate);
+    }
+
+    public void getReturnDate(){
+        System.out.println("Your return date is: "+this.dueDate);
+    }
+    public long hasExpired(){
+        if(this.dueDate != null && this.returnedDate != null) {
+            if (this.dueDate.isBefore(this.returnedDate)) {
+                difference= ChronoUnit.DAYS.between(returnedDate,dueDate);
+            }
+        }
+        return difference*10;
+    }
+}
