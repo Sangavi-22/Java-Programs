@@ -1,0 +1,199 @@
+package Library;
+import Book.BookOperations;
+import Validation.ValidateInput;
+import java.util.*;
+public class LibraryOperations {
+    private int noOfBooks,id;
+    private String bookNameFromUser;
+    private static LibraryOperations libraryOperations =null;
+    public HashMap<Integer, BookOperations>libraryBooks=new HashMap<>();
+    private HashMap<Integer,Integer>bookBorrowerDetails=new HashMap<>();
+    private Shelf shelf=new Shelf();
+    private ValidateInput validate=new ValidateInput();
+    Scanner input=new Scanner(System.in);
+    private LibraryOperations(){
+        //Constructor of Library class
+    }
+    public static LibraryOperations getInstance(){
+        if(libraryOperations ==null) {
+            libraryOperations =new LibraryOperations();
+        }
+        return libraryOperations;
+    }
+    public void viewBooks(){
+        for(int key:libraryBooks.keySet()) {
+            libraryBooks.get(key).getBook();
+        }
+    }
+    public void addBooks(){
+        noOfBooks=getNoOfBooks();
+        while(noOfBooks>0) {
+            int userChoice=getUserChoice();
+            if(userChoice==1) {
+                BookOperations book = new BookOperations();
+                book.setBook();
+                libraryBooks.put(book.getBookId(),book);
+            }
+            else {
+                id=getBookIdFromUser();
+                if(libraryBooks.containsKey(id)) {
+                    libraryBooks.get(id).updateBookCount();
+                }
+                else {
+                    System.out.println("Book not found");
+                }
+
+            }
+            noOfBooks--;
+        }
+    }
+    public void removeBooks(){
+        noOfBooks=getNoOfBooks();
+        while(noOfBooks>0) {
+            id=getBookIdFromUser();
+            if(libraryBooks.containsKey(id)) {
+                libraryBooks.remove(id);
+            }
+            else{
+                System.out.println("Book not found");
+            }
+            noOfBooks--;
+        }
+    }
+    public void searchBook(){
+        int userChoiceForSearching=getUserChoiceForSearching();
+        switch(userChoiceForSearching) {
+            case 1:
+                id=getBookIdFromUser();
+                if(libraryBooks.containsKey(id)) {
+                    libraryBooks.get(id).getBook();
+                }
+                else{
+                    System.out.println("Book not found");
+                }
+                break;
+            case 2:
+                boolean found=false;
+                bookNameFromUser=getBookNameFromUser();
+                for(int id:libraryBooks.keySet()) {
+                    if(libraryBooks.get(id).getBookNameFromBookDetails().equals(bookNameFromUser)) {
+                        libraryBooks.get(id).getBook();
+                        found=true;
+                    } else {
+                        System.out.println("Searching book");
+                    }
+                }
+                if(found==false) {
+                    System.out.println("Book not found");
+                }
+                else{
+                    System.out.println("End of Book Details");
+                }
+                break;
+            default:
+                System.out.println("Book cannot be searched");
+        }
+    }
+    public void borrowBooks(int studentId){
+        int id=getBookIdFromUser();
+        if(libraryBooks.containsKey(id)) {
+            if (libraryBooks.get(id).getBookCount() > 1) {
+                libraryBooks.get(id).borrowedBook();
+                bookBorrowerDetails.put(studentId, id);
+                System.out.println("Thank you. Please return the book on time.");
+            }
+            else {
+                System.out.println("Book currently not available. Please check after some time.");
+            }
+
+        }
+        else {
+            System.out.println("Book not found");
+        }
+    }
+    public void returnBooks(int studentId){
+        int id=getBookIdFromUser();
+        if(libraryBooks.containsKey(id)) {
+            libraryBooks.get(id).returnedBook();
+            bookBorrowerDetails.remove(studentId);
+        }
+        else {
+            System.out.println("Book not found");
+        }
+    }
+    public void viewBorrowerDetails() {
+        for (int studentId : bookBorrowerDetails.keySet()) {
+            System.out.println("Student id: " + studentId + " has borrowed book with id " + bookBorrowerDetails.get(studentId));
+        }
+    }
+    public int getNoOfBooks(){
+        String totalNumberOfBooks;
+        while (true) {
+            System.out.println("Enter the number of books");
+            totalNumberOfBooks = input.nextLine();
+            if (!(validate.validateNoOfBooks(totalNumberOfBooks))) {
+                System.out.println("Invalid input");
+            }
+            else {
+                break;
+            }
+        }
+        return Integer.parseInt(totalNumberOfBooks);
+    }
+    public int getUserChoice() {
+        String userInput;
+        while (true) {
+            System.out.println("Are you going to add a new book?\nEnter 1 for \"Yes\"\nEnter 2 for \"No\"");
+            userInput = input.nextLine();
+            if (!(validate.validateUserChoice(userInput))){
+                System.out.println("Invalid input");
+            }
+            else {
+                break;
+            }
+        }
+        return Integer.parseInt(userInput);
+    }
+    public int getBookIdFromUser(){
+        String inputBookIdFromUser;
+        while(true) {
+            System.out.println("Enter the id of the book");
+            inputBookIdFromUser = input.nextLine();
+            if (!(validate.validateBookId(inputBookIdFromUser))) {
+                System.out.println("Invalid book id");
+            }
+            else {
+                break;
+            }
+        }
+        return Integer.parseInt(inputBookIdFromUser);
+    }
+    public int getUserChoiceForSearching() {
+        String userInput;
+        while (true) {
+            System.out.println("Enter 1 for searching books using id\n" +
+                    "Enter 2 for searching books using book name\n");
+            userInput = input.nextLine();
+            if (!(validate.validateUserChoice(userInput))) {
+                System.out.println("Invalid input");
+            } else {
+                break;
+            }
+        }
+        return Integer.parseInt(userInput);
+    }
+    public String getBookNameFromUser() {
+        String inputBookNameFromUser;
+        while(true) {
+            System.out.println("Enter the name of the book");
+            inputBookNameFromUser = input.nextLine();
+            if (!(validate.validateBookName(inputBookNameFromUser))) {
+                System.out.println("Invalid book name");
+            } else {
+                break;
+            }
+        }
+        return inputBookNameFromUser;
+    }
+}
+
