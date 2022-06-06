@@ -53,7 +53,12 @@ public class BookOperations{
     public void returnedBook() {
         this.bookCount = this.bookCount + 1;
         this.date.setReturnedDate();
-        this.fine=this.date.hasExpired();
-        System.out.println("You have to pay a fine of amount: Rs."+this.fine);
+        this.fine=this.date.hasExpired(); 
+        if(fine>0) {
+            System.out.println("You have to pay a fine of amount: Rs." + this.fine);
+        } 
+        else {
+            System.out.println("Thank you for returning the book on time");
+        }
     }
 }
