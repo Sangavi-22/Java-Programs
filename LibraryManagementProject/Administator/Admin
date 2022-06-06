@@ -1,0 +1,36 @@
+package Administator;
+import Validation.ValidateInput;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+public class Admin{
+    private int id=0,memberType;
+    ValidateInput validate=new ValidateInput();
+    Scanner input=new Scanner(System.in);
+    public int generateId(){
+        memberType=getMemberType();
+        if(memberType==1){
+            id= ThreadLocalRandom.current().nextInt(1,1001);
+        }
+        else if (memberType==0){
+            id=ThreadLocalRandom.current().nextInt(1001,2001);
+        }
+        else{
+            id=0;
+        }
+        return id;
+    }
+    public int getMemberType(){
+        String userInput;
+        while(true) {
+            System.out.println("Are you a librarian:\nEnter 1 for Yes\nEnter 2 for No");
+            userInput=input.nextLine();
+            if(!(validate.validateUserChoice(userInput))) {
+                System.out.println("Invalid user input");
+            }
+            else{
+                break;
+            }
+        }
+        return Integer.parseInt(userInput);
+    }
+}
