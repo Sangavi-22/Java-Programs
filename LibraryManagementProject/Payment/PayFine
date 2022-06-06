@@ -1,0 +1,54 @@
+package Payment;
+import Validation.ValidateInput;
+import java.util.*;
+public class PayFine {
+    private String userInput;
+    private ValidateInput validate=new ValidateInput();
+    Scanner input = new Scanner(System.in);
+    public void payFine() {
+        System.out.println("1. Pay using card\n2. Pay using googlePay");
+        PaymentOperation payment;
+        int choice = getInputFromUser();
+        switch (choice) {
+            case 1:
+                String cardNumber=getAccountId();
+                payment = new Card();
+                payment.transferAmount(cardNumber);
+                break;
+            case 2:
+                String googlePayId = getAccountId();
+                payment= new GooglePay();
+                payment.transferAmount(googlePayId);
+                break;
+            default:
+                System.out.println("Thank you for paying by cash");
+        }
+    }
+    public int getInputFromUser() {
+        while(true) {
+            System.out.println("Enter your choice");
+            userInput = input.nextLine();
+            if(!(validate.validateUserChoice(userInput))) {
+                System.out.println("Invalid input");
+            }
+            else {
+                break;
+            }
+        }
+        return Integer.parseInt(userInput);
+    }
+    public String getAccountId(){
+        String inputAccountId;
+        while(true) {
+            System.out.println("Enter your id");
+            inputAccountId = input.nextLine();
+            if(!(validate.validateAccountId(inputAccountId))) {
+                System.out.println("Invalid input");
+            }
+            else {
+                break;
+            }
+        }
+        return inputAccountId;
+    }
+}
