@@ -1,0 +1,68 @@
+package ProfileManagement;
+import Validation.ValidateInput;
+import java.util.Scanner;
+public class ProfileDetails{
+    private String name,email;
+    private long mobileNum=0;
+    private ProfileStatus profileStatus=ProfileStatus.INACTIVE;
+    private ValidateInput validate=new ValidateInput();
+    Scanner input=new Scanner(System.in);
+    public void setProfileDetails(){
+        this.name=getName();
+        this.email=getEmail();
+        this.mobileNum=getMobileNum();
+    }
+    public void setProfileStatus(){
+        if(this.profileStatus==ProfileStatus.ACTIVE) {
+            this.profileStatus=ProfileStatus.INACTIVE;
+        }
+        else{
+            this.profileStatus=ProfileStatus.ACTIVE;
+        }
+    }
+    public String getProfileDetails(){
+        return "Name: "+this.name+"\nemail: "+this.email+"\nmobile: "+this.mobileNum;
+    }
+    public String getName() {
+        String inputProfileName;
+        while (true) {
+            System.out.println("Enter your name:");
+            inputProfileName = input.nextLine();
+            if (!(validate.validateProfileName(inputProfileName))) {
+                System.out.println("Invalid name");
+            } else {
+                break;
+            }
+        }
+        return inputProfileName;
+    }
+    public String getEmail(){
+        String inputEmail;
+        while (true) {
+            System.out.println("Enter your email:");
+            inputEmail = input.nextLine();
+            if (!(validate.validateEmail(inputEmail))) {
+                System.out.println("Invalid email");
+            } else {
+                break;
+            }
+        }
+        return inputEmail;
+    }
+
+    public long getMobileNum(){
+        String inputMobileNum;
+        while (true) {
+            System.out.println("Enter your mobileNum:");
+            inputMobileNum = input.nextLine();
+            if (!(validate.validateMobileNum(inputMobileNum))) {
+                System.out.println("Invalid mobile number");
+            }
+            else {
+                break;
+            }
+        }
+        return Long.parseLong(inputMobileNum);
+    }
+
+}
