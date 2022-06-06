@@ -123,6 +123,12 @@ public class LibraryOperations {
             System.out.println("Book not found");
         }
     }
+    public void renewBooks(int studentId){
+        int id=getBookIdFromUser();
+        if(libraryBooks.containsKey(id)) {
+            libraryBooks.get(id).renewBook();
+        }
+    }
     public void viewBorrowerDetails() {
         for (int studentId : bookBorrowerDetails.keySet()) {
             System.out.println("Student id: " + studentId + " has borrowed book with id " + bookBorrowerDetails.get(studentId));
@@ -198,3 +204,4 @@ public class LibraryOperations {
         return inputBookNameFromUser;
     }
 }
+
