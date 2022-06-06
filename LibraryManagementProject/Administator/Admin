@@ -11,7 +11,7 @@ public class Admin{
         if(memberType==1){
             id= ThreadLocalRandom.current().nextInt(1,1001);
         }
-        else if (memberType==0){
+        else if(memberType==2){
             id=ThreadLocalRandom.current().nextInt(1001,2001);
         }
         else{
