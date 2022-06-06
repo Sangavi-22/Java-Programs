@@ -1,17 +1,17 @@
 package ProfileManagement;
-import Library.LibraryOperations;
+import LibraryManagement.Library;
 import LoginManagement.LoginOperations;
 import Payment.PayFine;
 import Validation.ValidateInput;
 import java.util.Scanner;
-public class Student extends ProfileDetails {
+public class StudentProfile extends Profile {
     private int borrowedCount=0,studentId;
     private static int studentIdentificationNumber =0;
-    private LibraryOperations library;
+    private Library library;
     private ValidateInput validate=new ValidateInput();
 
     Scanner input = new Scanner(System.in);
-    public Student(){
+    public StudentProfile(){
         studentIdentificationNumber++;
         this.studentId=studentIdentificationNumber;
         System.out.println("Your Student id is: "+this.studentId);
@@ -19,7 +19,7 @@ public class Student extends ProfileDetails {
         this.setProfileStatus();
     }
     public void getLibraryAccessForProfile() {
-        library=LibraryOperations.getInstance();
+        library=Library.getInstance();
     }
     public void studentMenu() {
         System.out.println("********************Welcome Student!********************");
