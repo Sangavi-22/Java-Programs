@@ -1,7 +1,7 @@
 package ProfileManagement;
 import Validation.ValidateInput;
 import java.util.Scanner;
-public class ProfileDetails{
+public abstract class ProfileDetails{
     private String name,email;
     private long mobileNum=0;
     private ProfileStatus profileStatus=ProfileStatus.INACTIVE;
@@ -23,6 +23,7 @@ public class ProfileDetails{
     public String getProfileDetails(){
         return "Name: "+this.name+"\nemail: "+this.email+"\nmobile: "+this.mobileNum;
     }
+    public abstract void getLibraryAccessForProfile();
     public String getName() {
         String inputProfileName;
         while (true) {
