@@ -1,24 +1,24 @@
-package Library;
+package LibraryManagement;
 import Book.BookOperations;
 import Validation.ValidateInput;
 import java.util.*;
-public class LibraryOperations {
+public class Library {
     private int noOfBooks,id;
     private String bookNameFromUser;
-    private static LibraryOperations libraryOperations =null;
+    private static Library library =null;
     public HashMap<Integer, BookOperations>libraryBooks=new HashMap<>();
     private static HashMap<Integer,Integer>bookBorrowerDetails=new HashMap<>();
     private Shelf shelf=new Shelf();
     private ValidateInput validate=new ValidateInput();
     Scanner input=new Scanner(System.in);
-    private LibraryOperations(){
+    private Library(){
         //Constructor of Library class
     }
-    public static LibraryOperations getInstance(){
-        if(libraryOperations ==null) {
-            libraryOperations =new LibraryOperations();
+    public static Library getInstance(){
+        if(library ==null) {
+            library =new Library();
         }
-        return libraryOperations;
+        return library;
     }
     public void viewBooks(){
         for(int key:libraryBooks.keySet()) {
