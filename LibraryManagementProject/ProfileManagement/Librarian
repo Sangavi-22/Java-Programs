@@ -11,7 +11,7 @@ public class Librarian extends ProfileDetails {
         this.setProfileDetails();
         this.setProfileStatus();
     }
-    public void getLibrarianAccess(){
+    public void getLibraryAccessForProfile(){
         library=LibraryOperations.getInstance();
     }
     public void librarianMenu() {
