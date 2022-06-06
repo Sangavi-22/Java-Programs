@@ -1,10 +1,10 @@
 package ProfileManagement;
-import Library.LibraryOperations;
+import LibraryManagement.Library;
 import LoginManagement.LoginOperations;
 import Validation.ValidateInput;
 import java.util.Scanner;
-public class Librarian extends ProfileDetails {
-    private LibraryOperations library;
+public class Librarian extends Profile {
+    private Library library;
     ValidateInput validate=new ValidateInput();
     Scanner input = new Scanner(System.in);
     public Librarian(){
@@ -12,7 +12,7 @@ public class Librarian extends ProfileDetails {
         this.setProfileStatus();
     }
     public void getLibraryAccessForProfile(){
-        library=LibraryOperations.getInstance();
+        library=Library.getInstance();
     }
     public void librarianMenu() {
         System.out.println("********************Welcome Librarian!********************");
