@@ -27,6 +27,6 @@ public class Date
                 difference= ChronoUnit.DAYS.between(returnedDate,dueDate);
             }
         }
-        return difference*10;
+        return difference;
     }
 }
