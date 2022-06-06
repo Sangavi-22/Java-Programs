@@ -1,0 +1,98 @@
+package ProfileManagement;
+import Library.LibraryOperations;
+import LoginManagement.LoginOperations;
+import Validation.ValidateInput;
+import java.util.Scanner;
+public class Librarian extends ProfileDetails {
+    private LibraryOperations library;
+    ValidateInput validate=new ValidateInput();
+    Scanner input = new Scanner(System.in);
+    public Librarian(){
+        this.setProfileDetails();
+        this.setProfileStatus();
+    }
+    public void getLibrarianAccess(){
+        library=LibraryOperations.getInstance();
+    }
+    public void librarianMenu() {
+        System.out.println("********************Welcome Librarian!********************");
+        System.out.println("Librarian Menu:\n"+
+                           "Enter 1 to view Books\n"+
+                           "Enter 2 to add Books\n"+
+                           "Enter 3 to remove Books\n"+
+                           "Enter 4 to search Books\n"+
+                           "Enter 5 to view borrower details\n"+
+                           "Enter 6 to view profile\n"+
+                           "Enter 7 to remove an account\n"+
+                           "Enter 8 to logout");
+        int LibrarianActionToPerform = getLibrarianActionToPerform();
+        switch (LibrarianActionToPerform) {
+            case 1:
+                library.viewBooks();
+                librarianMenu();
+                break;
+            case 2:
+                library.addBooks();
+                librarianMenu();
+                break;
+            case 3:
+                library.removeBooks();
+                librarianMenu();
+                break;
+            case 4:
+                library.searchBook();
+                librarianMenu();
+                break;
+            case 5:
+                library.viewBorrowerDetails();
+                librarianMenu();
+                break;
+            case 6:
+                System.out.println(this.getProfileDetails());
+                librarianMenu();
+                break;
+            case 7:
+                System.out.println("Enter the userName to remove");
+                String user=getUserNameToRemove();
+                LoginOperations.removeUser(user);
+                librarianMenu();
+                break;
+            case 8:
+                this.setProfileStatus();
+                LoginOperations.logOut();
+                break;
+            default:
+                System.out.println("Invalid choice");
+                librarianMenu();
+                break;
+        }
+    }
+    public int getLibrarianActionToPerform(){
+        String userInput;
+        while(true) {
+            System.out.println("Please enter your choice");
+            userInput = input.nextLine();
+            if (!(validate.validateUserChoice(userInput))) {
+                System.out.println("Invalid input");
+            }
+            else {
+                break;
+            }
+        }
+        return Integer.parseInt(userInput);
+    }
+    public String getUserNameToRemove(){
+        String inputUserAccountToRemove;
+        while(true) {
+            System.out.println("Please enter the username");
+            inputUserAccountToRemove = input.nextLine();
+            if (!(validate.validateUserAccountName(inputUserAccountToRemove))) {
+                System.out.println("Invalid username");
+            }
+            else {
+                break;
+            }
+        }
+        return inputUserAccountToRemove;
+    }
+}
