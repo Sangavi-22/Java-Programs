@@ -1,0 +1,59 @@
+package Book;
+import Library.Shelf;
+public class BookOperations{
+    private long fine;
+    private int bookId,bookCount=0;
+    private static int identification =0;
+    private BookDetails bookDetails =new BookDetails();
+    private Author author=new Author();
+    private PageDetails page=new PageDetails();
+    private Date date=new Date();
+    private Shelf shelf=new Shelf();
+    public BookOperations(){
+        identification++;
+        this.bookId=identification;
+    }
+    public int getBookId(){
+        return this.bookId;
+    }
+    public void setBook(){
+        this.bookCount=1;
+        this.bookDetails.setBookDetails();
+        this.author.setAuthorDetails();
+        this.page.setNoOfPages();
+        this.page.setPagesColor();
+        this.page.setPageLayout();
+        this.shelf.setShelfLocation();
+        System.out.println("The Id of the book added is: "+this.bookId);
+    }
+    public void getBook(){
+        System.out.println("Id of the book: "+this.bookId);
+        this.bookDetails.getBookDetails();
+        this.author.getAuthorDetails();
+        this.page.getPageDetails();
+        this.shelf.getShelfLocation();
+    }
+    public String getBookNameFromBookDetails(){
+        String bookNameForUser=this.bookDetails.getBookNameForComparing();
+        return bookNameForUser;
+    }
+    public void updateBookCount(){
+        this.bookCount=this.bookCount+1;
+    }
+    public int getBookCount(){
+        return this.bookCount;
+    }
+    public void borrowedBook(){
+        this.bookCount=this.bookCount-1;
+        this.date.setBookIssueDate();
+        this.date.getIssueDate();
+        this.date.setBookReturnDate();
+        this.date.getReturnDate();
+    }
+    public void returnedBook() {
+        this.bookCount = this.bookCount + 1;
+        this.date.setReturnedDate();
+        this.fine=this.date.hasExpired();
+        System.out.println("You have to pay a fine of amount: Rs."+this.fine);
+    }
+}
