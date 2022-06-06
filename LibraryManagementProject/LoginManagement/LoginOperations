@@ -55,12 +55,12 @@ public class LoginOperations {
         LoginOperations.accountName=userName;
         if(id>=1 && id<=1000) {
             Librarian userName = new Librarian();
-            userName.getLibrarianAccess();
+            userName.getLibraryAccessForProfile();
             userName.librarianMenu();
         }
         else if(id>=1001 && id<=2000) {
             Student userName = new Student();
-            userName.getStudentAccess();
+            userName.getLibraryAccessForProfile();
             userName.studentMenu();
         }
         else{
