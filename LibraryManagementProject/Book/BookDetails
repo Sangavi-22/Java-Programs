@@ -1,6 +1,3 @@
-package Book;
-import Validation.ValidateInput;
-import java.util.*;
 public class BookDetails {
     private int bookCost;
     private String bookName,publisherName;
