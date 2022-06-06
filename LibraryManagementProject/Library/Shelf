@@ -1,0 +1,12 @@
+package Library;
+public class Shelf{
+    private static int idNum=0;
+    private int bookLocation;
+    public void setShelfLocation(){
+        idNum++;
+        this.bookLocation=idNum;
+    }
+    public void getShelfLocation(){
+        System.out.println("Book placed at the location id: "+this.bookLocation);
+    }
+}
