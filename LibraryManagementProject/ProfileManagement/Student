@@ -18,7 +18,7 @@ public class Student extends ProfileDetails {
         this.setProfileDetails();
         this.setProfileStatus();
     }
-    public void getStudentAccess() {
+    public void getLibraryAccessForProfile() {
         library=LibraryOperations.getInstance();
     }
     public void studentMenu() {
@@ -27,11 +27,12 @@ public class Student extends ProfileDetails {
                            "Enter 1 to view Books\n"+
                            "Enter 2 to borrow Books\n"+
                            "Enter 3 to return Books\n"+
-                           "Enter 4 to search Books\n"+
-                           "Enter 5 to pay Fine\n"+
-                           "Enter 6 to view Profile\n"+
-                           "Enter 7 to Delete Account\n"+
-                           "Enter 8 to logout");
+                           "Enter 4 to renew Book\n"+
+                           "Enter 5 to search Books\n"+
+                           "Enter 6 to pay Fine\n"+
+                           "Enter 7 to view Profile\n"+
+                           "Enter 8 to Delete Account\n"+
+                           "Enter 9 to logout");
         int studentActionToPerform =getStudentActionToPerform();
         switch (studentActionToPerform) {
             case 1:
@@ -54,25 +55,29 @@ public class Student extends ProfileDetails {
                 studentMenu();
                 break;
             case 4:
-                library.searchBook();
+                library.renewBooks(studentId);
                 studentMenu();
                 break;
             case 5:
+                library.searchBook();
+                studentMenu();
+                break;
+            case 6:
                 PayFine fine=new PayFine();
                 fine.payFine();
                 studentMenu();
                 break;
-            case 6:
+            case 7:
                 System.out.println(this.getProfileDetails());
                 studentMenu();
                 break;
-            case 7:
+            case 8:
                 System.out.println("Enter your userName to delete");
                 String user=getUserAccountToDelete();
                 LoginOperations.removeUser(user);
                 studentMenu();
                 break;
-            case 8:
+            case 9:
                 this.setProfileStatus();
                 LoginOperations.logOut();
                 break;
