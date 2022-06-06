@@ -1,1 +1,7 @@
-
+import LoginManagement.LoginOperations;
+public class Main{
+    public static void main(String args[]){
+        LoginOperations loginOperations=new LoginOperations();
+        loginOperations.manageLogin();
+    }
+}
