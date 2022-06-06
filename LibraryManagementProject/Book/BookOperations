@@ -27,11 +27,13 @@ public class BookOperations{
         System.out.println("The Id of the book added is: "+this.bookId);
     }
     public void getBook(){
+        System.out.println("*******************************************************");
         System.out.println("Id of the book: "+this.bookId);
         this.bookDetails.getBookDetails();
         this.author.getAuthorDetails();
         this.page.getPageDetails();
-        this.shelf.getShelfLocation();
+        this.shelf.getShelfLocation(); 
+        System.out.println("*******************************************************");
     }
     public String getBookNameFromBookDetails(){
         String bookNameForUser=this.bookDetails.getBookNameForComparing();
@@ -53,10 +55,10 @@ public class BookOperations{
     public void returnedBook() {
         this.bookCount = this.bookCount + 1;
         this.date.setReturnedDate();
-        this.fine=this.date.hasExpired(); 
+        this.fine=this.date.hasExpired();
         if(fine>0) {
             System.out.println("You have to pay a fine of amount: Rs." + this.fine);
-        } 
+        }
         else {
             System.out.println("Thank you for returning the book on time");
         }
