@@ -32,7 +32,7 @@ public class BookOperations{
         this.bookDetails.getBookDetails();
         this.author.getAuthorDetails();
         this.page.getPageDetails();
-        this.shelf.getShelfLocation(); 
+        this.shelf.getShelfLocation();
         System.out.println("*******************************************************");
     }
     public String getBookNameFromBookDetails(){
@@ -55,12 +55,25 @@ public class BookOperations{
     public void returnedBook() {
         this.bookCount = this.bookCount + 1;
         this.date.setReturnedDate();
-        this.fine=this.date.hasExpired();
+        this.fine=this.date.hasExpired()*10;
         if(fine>0) {
             System.out.println("You have to pay a fine of amount: Rs." + this.fine);
         }
         else {
             System.out.println("Thank you for returning the book on time");
+        }
+    }
+    public void renewBook(){
+        this.date.setReturnedDate();
+        long expired=this.date.hasExpired();
+        if(expired>0) {
+            System.out.println("You have to return the book as the due date has been exceeded");
+        }
+        else {
+            this.date.setBookIssueDate();
+            this.date.getIssueDate();
+            this.date.setBookReturnDate();
+            this.date.getReturnDate();
         }
     }
 }
