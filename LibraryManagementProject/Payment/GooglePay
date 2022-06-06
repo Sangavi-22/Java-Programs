@@ -1,4 +1,3 @@
-package Payment;
 import Validation.ValidateInput;
 import java.util.Scanner;
 public class GooglePay implements PaymentOperation,UPIPayments{
