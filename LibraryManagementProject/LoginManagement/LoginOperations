@@ -1,7 +1,7 @@
 package LoginManagement;
 import Administator.Admin;
-import ProfileManagement.Librarian;
-import ProfileManagement.Student;
+import ProfileManagement.LibrarianProfile;
+import ProfileManagement.StudentProfile;
 import Validation.ValidateInput;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -54,12 +54,12 @@ public class LoginOperations {
     public void validateDetails(int id){
         LoginOperations.accountName=userName;
         if(id>=1 && id<=1000) {
-            Librarian userName = new Librarian();
+            LibrarianProfile userName = new LibrarianProfile();
             userName.getLibraryAccessForProfile();
             userName.librarianMenu();
         }
         else if(id>=1001 && id<=2000) {
-            Student userName = new Student();
+            StudentProfile userName = new StudentProfile();
             userName.getLibraryAccessForProfile();
             userName.studentMenu();
         }
