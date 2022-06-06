@@ -1,13 +1,13 @@
 package Book;
-import Library.Shelf;
-public class BookOperations{
+import LibraryManagement.Shelf;
+public class BookOperations {
     private long fine;
     private int bookId,bookCount=0;
     private static int identification =0;
     private BookDetails bookDetails =new BookDetails();
-    private Author author=new Author();
-    private PageDetails page=new PageDetails();
-    private Date date=new Date();
+    private BookAuthor author=new BookAuthor();
+    private BookPages page=new BookPages();
+    private BookDates date=new BookDates();
     private Shelf shelf=new Shelf();
     public BookOperations(){
         identification++;
