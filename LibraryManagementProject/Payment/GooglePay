@@ -1,6 +1,36 @@
 package Payment;
-public class GooglePay implements PaymentOperation {
+import Validation.ValidateInput;
+import java.util.Scanner;
+public class GooglePay implements PaymentOperation,UPIPayments{
+    ValidateInput validate=new ValidateInput();
+    Scanner input=new Scanner(System.in);
+    public void claimScratchCard() {
+        System.out.println("You have received a reward");
+        int userInput=getUserChoiceForScratchCard();
+        if(userInput==1) {
+            System.out.println("You get a 50% cashBack");
+        }
+        else {
+            System.out.println("Saved for later successfully");
+        }
+    }
     public void transferAmount(String accountId){
         System.out.println("Thank you for using GooglePay. Amount sent successfully");
+        claimScratchCard();
+    }
+    public int getUserChoiceForScratchCard(){
+        String userChoice;
+        while(true) {
+            System.out.println("Enter 1 to claim it now\nEnter 2 to use it later");
+            System.out.println("Enter your choice");
+            userChoice= input.nextLine();
+            if(!(validate.validateUserChoice(userChoice))) {
+                System.out.println("Invalid input");
+            }
+            else {
+                break;
+            }
+        }
+        return Integer.parseInt(userChoice);
     }
 }
