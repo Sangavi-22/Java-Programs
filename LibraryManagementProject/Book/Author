@@ -1,1 +1,52 @@
+package Book;
+import Validation.ValidateInput;
+import java.util.*;
+public class Author {
+    private int noOfAuthors=0;
+    private String authorName="";
+    private ArrayList<String>authors=new ArrayList<>();
+    private ValidateInput validate=new ValidateInput();
+    Scanner input=new Scanner(System.in);
+    public void setAuthorDetails(){
+        noOfAuthors=getNoOfAuthors();
+        while(noOfAuthors>0) {
+            authorName=getAuthorName();
+            this.authors.add(authorName);
+            noOfAuthors--;
+        }
+    }
+    public void getAuthorDetails(){
+        int counter=1;
+        for(String name: this.authors) {
+            System.out.println("Authors of the book: ");
+            System.out.println((counter++) + ". " + name);
+        }
+    }
+    public int getNoOfAuthors(){
+        String inputNoOfAuthors;
+        while(true) {
+            System.out.println("Enter the number of authors");
+            inputNoOfAuthors = input.nextLine();
+            if (!(validate.validateNoOfAuthors(inputNoOfAuthors))) {
+                System.out.println("Invalid input");
+            } else {
+                break;
+            }
+        }
+        return Integer.parseInt(inputNoOfAuthors);
+    }
+    public String getAuthorName(){
+        String inputAuthorName;
+        while(true) {
+            System.out.println("Enter the name of the author");
+            inputAuthorName = input.nextLine();
+            if (!(validate.validateAuthorName(inputAuthorName))) {
+                System.out.println("Invalid author name");
+            } else {
+                break;
+            }
+        }
+        return inputAuthorName;
+    }
+}
 
