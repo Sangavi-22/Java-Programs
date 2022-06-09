@@ -1,0 +1,113 @@
+package Controller;
+import Model.LibraryModel;
+import View.LibraryView;
+
+public class LibraryController {
+    private final LibraryModel model;
+    private final LibraryView view;
+    public LibraryController(LibraryModel model,LibraryView view){
+        this.model=model;
+        this.view=view;
+    }
+    public void setPhoneNum(){
+        this.model.setPhoneNum();
+    }
+    public String getPhoneNum(){
+        return this.model.getPhoneNum();
+    }
+    public void updateView(){
+        view.printPhoneNum(this.getPhoneNum());
+    }
+    public void viewBooks(){
+        for(int key:model.libraryBooks.keySet()) {
+            model.libraryBooks.get(key).updateView();
+        }
+    }
+    public void addBook(int bookId, BookController bookController){
+        model.libraryBooks.put(bookId,bookController);
+    }
+    public void removeBook(int id){
+
+        model.libraryBooks.remove(id);
+    }
+    public void searchBookByItsName(String book){
+        for(int key:model.libraryBooks.keySet()) {
+            if(model.libraryBooks.get(key).getBookName().toLowerCase().contains(book.toLowerCase())) {
+                model.libraryBooks.get(key).updateView();
+            }
+            else{
+                continue;
+            }
+        }
+    }
+    public void searchBookByItsAuthorName(String authorName){
+        for(int key:model.libraryBooks.keySet()) {
+            if (model.libraryBooks.get(key).getAuthorsName().contains(authorName)) {
+                model.libraryBooks.get(key).updateView();
+            }
+            else {
+                continue;
+            }
+        }
+    }
+    public boolean borrowBook(int id, StudentAccountController studentAccountController){
+        boolean found;
+        if(model.libraryBooks.containsKey(id) && model.libraryBooks.get(id).getBookCount()>0) {
+            model.libraryBooks.get(id).updateBookCount();
+            model.libraryBooks.get(id).setBookIssueDate();
+            model.libraryBooks.get(id).setBookDueDate();
+            model.libraryBooks.get(id).updateView();
+            model.libraryBooks.get(id).printDates();
+            model.borrowerDetails.put(id, studentAccountController);
+            studentAccountController.setBorrowedCount();
+            found=true;
+        }
+        else {
+            found=false;
+        }
+        return found;
+    }
+    public void viewBorrowers(){
+        for(int key:model.borrowerDetails.keySet()){
+            model.libraryBooks.get(key).updateView();
+            model.borrowerDetails.get(key).updateView();
+        }
+    }
+    public long returnBook(int id)
+    {
+        long difference;
+        if(model.libraryBooks.containsKey(id)) {
+            model.borrowerDetails.get(id).updateBorrowedCount();
+            model.libraryBooks.get(id).setBookCount();
+            model.libraryBooks.get(id).setBookReturnedDateForReturn();
+            difference=model.libraryBooks.get(id).hasExpired();
+            model.borrowerDetails.remove(id);
+        }
+        else{
+            difference=0;
+        }
+        return difference;
+    }
+    public boolean renewBook(int id) {
+        boolean renewed=false;
+        if (model.libraryBooks.containsKey(id) && model.borrowerDetails.containsKey(id)) {
+            model.libraryBooks.get(id).setBookReturnedDateForRenew();
+            if (model.libraryBooks.get(id).hasExpired()<0) {
+                model.libraryBooks.get(id).setBookIssueDate();
+                model.libraryBooks.get(id).setBookDueDate();
+                model.libraryBooks.get(id).printDates();
+            }
+            renewed=true;
+        }
+        else{
+            renewed=false;
+        }
+        return renewed;
+    }
+    public boolean containsId(int id){
+        return model.libraryBooks.containsKey(id);
+    }
+    public BookController returnObject(int id){
+        return model.libraryBooks.get(id);
+    }
+}
