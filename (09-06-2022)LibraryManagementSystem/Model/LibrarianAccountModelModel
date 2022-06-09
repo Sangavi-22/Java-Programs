@@ -1,0 +1,11 @@
+package Model;
+
+public class LibrarianAccountModelModel extends UserAccountModel {
+    private int id;
+    public void setLibrarianId(int id){
+        this.id=id;
+    }
+    public int getLibrarianId(){
+        return this.id;
+    }
+}
