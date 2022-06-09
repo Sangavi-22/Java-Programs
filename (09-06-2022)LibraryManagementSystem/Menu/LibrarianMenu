@@ -1,0 +1,237 @@
+package Menu;
+import Model.*;
+import View.*;
+import Controller.*;
+import Input.InputsFromUser;
+public class LibrarianMenu{
+    private final LibrarianAccountController librarianAccountController;
+    private final LibraryModel libraryModel=LibraryModel.getInstance();
+    private final LibraryView libraryView=new LibraryView();
+    private final LibraryController libraryController=new LibraryController(libraryModel,libraryView);
+    private final InputsFromUser inputsFromUser;
+    public LibrarianMenu(LibrarianAccountController librarianAccountController, InputsFromUser inputsFromUser){
+        this.librarianAccountController=librarianAccountController;
+        this.inputsFromUser=inputsFromUser;
+    }
+    public void Menu(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println();
+        System.out.println("*******************************************************");
+        System.out.println("!                  WELCOME LIBRARIAN                  !");
+        System.out.println("*******************************************************");
+        System.out.println("!                Enter 1 to view Books                !");
+        System.out.println("!                Enter 2 to add Books                 !");
+        System.out.println("!                Enter 3 to remove Books              !");
+        System.out.println("!                Enter 4 to search Books              !");
+        System.out.println("!                Enter 5 to view Borrowers            !");
+        System.out.println("!                Enter 6 to view Profile              !");
+        System.out.println("!                Enter 7 to remove Account            !");
+        System.out.println("!                Enter 8 to Logout                    !");
+        System.out.println("*******************************************************");
+        System.out.println();
+        int userChoice =inputsFromUser.inputChoice();
+        BookController bookController;
+        switch(LibrarianActions.values()[userChoice-1]) {
+            case ViewBooks:
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println();
+                System.out.println("#######################################################");
+                System.out.println("!                     VIEW BOOKS                      !");
+                System.out.println("#######################################################");
+                libraryController.viewBooks();
+                System.out.println("################### END OF VIEW BOOKS #################");
+                System.out.println();
+                Menu();
+                break;
+            case AddBooks:
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println();
+                System.out.println("#######################################################");
+                System.out.println("!                     ADD BOOKS                       !");
+                System.out.println("#######################################################");
+                int noOfBooks = inputsFromUser.inputNoOfBooks();
+                while(noOfBooks >0) {
+                    System.out.println("Are you going to add a new book:\n1.Yes\n2.No");
+                    int userInput = inputsFromUser.inputChoice();
+                    if (userInput == 1) {
+                        BookDetailsModel bookDetailsModel = new BookDetailsModel();
+                        BookDatesModel bookDateModel = new BookDatesModel();
+                        BookPagesModel bookPagesModel = new BookPagesModel();
+                        BookAuthorModel bookAuthorModel=new BookAuthorModel();
+                        BookView bookView = new BookView();
+                        bookController = new BookController(bookDetailsModel, bookDateModel, bookPagesModel,bookAuthorModel, bookView);
+                        bookController.setBookId();
+                        bookController.setBookLocationId();
+                        String bookName = inputsFromUser.inputBookName();
+                        bookController.setBookName(bookName);
+                        String publicationName = inputsFromUser.inputPublisherName();
+                        bookController.setPublicationName(publicationName);
+                        int bookCost = inputsFromUser.inputBookCost();
+                        bookController.setBookCost(bookCost);
+                        bookController.setBookCount();
+                        int noOfPages = inputsFromUser.inputNoOfPages();
+                        bookController.setNoOfPages(noOfPages);
+                        String pageLayout = inputsFromUser.inputPageLayout();
+                        bookController.setPageLayout(pageLayout);
+                        int noOfAuthors=inputsFromUser.inputNoOfAuthors();
+                        while(noOfAuthors-->0){
+                            String authorName=inputsFromUser.inputAuthorName();
+                            bookController.addAuthorName(authorName);
+                        }
+                        libraryController.addBook(bookController.getBookId(), bookController);
+                        bookController.updateView();
+                        System.out.println("Book added successfully");
+                    }
+                    else {
+                        int id = inputsFromUser.inputBookIdFromUser();
+                        if (libraryController.containsId(id)) {
+                            bookController = libraryController.returnObject(id);
+                            bookController.setBookCount();
+                            bookController.updateView();
+                            System.out.println("Book added successfully");
+                        } else {
+                            System.out.println("Book not found");
+                        }
+                    }
+                    noOfBooks--;
+                }
+                System.out.println("################### END OF ADD BOOKS ##################");
+                System.out.println();
+                Menu();
+                break;
+            case RemoveBooks:
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println();
+                System.out.println("#######################################################");
+                System.out.println("!                    REMOVE BOOKS                     !");
+                System.out.println("#######################################################");
+                noOfBooks =inputsFromUser.inputNoOfBooks();
+                while(noOfBooks >0) {
+                    int id=inputsFromUser.inputBookIdFromUser();
+                    if (libraryController.containsId(id)) {
+                        libraryController.removeBook(id);
+                    }
+                    else{
+                        System.out.println("Book not found");
+                    }
+                    noOfBooks--;
+                }
+                System.out.println("################### END OF REMOVE BOOKS ###############");
+                System.out.println();
+                Menu();
+                break;
+            case SearchBooks:
+                System.out.println("1.Search book by id\n2.Search book by name\n3.Search book by author name");
+                int userChoiceForSearching=inputsFromUser.inputChoice();
+                switch(SearchingOptions.values()[userChoiceForSearching-1]) {
+                    case SearchById:
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        System.out.println();
+                        System.out.println("#######################################################");
+                        System.out.println("!                    SEARCH BOOKS                     !");
+                        System.out.println("#######################################################");
+                        System.out.println();
+                        int id=inputsFromUser.inputBookIdFromUser();
+                        if (libraryController.containsId(id)) {
+                            bookController = libraryController.returnObject(id);
+                            bookController.updateView();
+                        }
+                        else{
+                            System.out.println("Book not found");
+                        }
+                        System.out.println("################### END OF SEARCH BOOKS ###############");
+                        System.out.println();
+                        break;
+                    case SearchByName:
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        System.out.println();
+                        System.out.println("#######################################################");
+                        System.out.println("!                    SEARCH BOOKS                     !");
+                        System.out.println("#######################################################");
+                        System.out.println();
+                        String bookName=inputsFromUser.inputBookName();
+                        libraryController.searchBookByItsName(bookName);
+                        System.out.println("################### END OF SEARCH BOOKS ###############");
+                        System.out.println();
+                        break;
+                    case SearchByAuthor:
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        System.out.println();
+                        System.out.println("#######################################################");
+                        System.out.println("!                    SEARCH BOOKS                     !");
+                        System.out.println("#######################################################");
+                        System.out.println();
+                        String authorName=inputsFromUser.inputAuthorName();
+                        libraryController.searchBookByItsAuthorName(authorName);
+                        System.out.println("################### END OF SEARCH BOOKS ###############");
+                        break;
+                    default:
+                        System.out.println("Insufficient details to search");
+                        break;
+                }
+                Menu();
+                break;
+            case ViewBorrowers:
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println();
+                System.out.println("#######################################################");
+                System.out.println("!           VIEW BOOK BORROWERS DETAILS               !");
+                System.out.println("#######################################################");
+                libraryController.viewBorrowers();
+                System.out.println("########################## END ########################");
+                System.out.println();
+                Menu();
+                break;
+            case ViewProfile:
+                librarianAccountController.updateView();
+                Menu();
+                break;
+            case RemoveAccount:
+                System.out.println("Enter the username and userId to remove");
+                String userName=inputsFromUser.inputUserName();
+                LibraryMenu.removeUser(userName);
+                Menu();
+                break;
+            case LogOut:
+                LibraryMenu.logOut();
+                break;
+            default:
+                System.out.println("Invalid choice");
+                Menu();
+                break;
+        }
+    }
+
+}
