@@ -1,0 +1,65 @@
+package Controller;
+
+import Model.StudentAccountModel;
+import View.StudentAccountView;
+
+public class StudentAccountController {
+    private final StudentAccountModel model;
+    private final StudentAccountView view;
+    public StudentAccountController(StudentAccountModel model, StudentAccountView view){
+        this.model=model;
+        this.view=view;
+    }
+    public void setName(String name){
+        this.model.setName(name);
+    }
+    public String getName(){
+        return this.model.getName();
+    }
+    public void setEmail(String email){
+        this.model.setEmail(email);
+    }
+    public String getEmail(){
+        return this.model.getEmail();
+    }
+    public void setMobileNum(long mobileNum){
+        this.model.setMobileNum(mobileNum);
+    }
+    public long getMobileNum(){
+        return this.model.getMobileNum();
+    }
+    public void setUserName(String userName){
+        this.model.setUserName(userName);
+    }
+    public String getUserName(){
+        return this.model.getUserName();
+    }
+    public void setPassword(String password){
+        this.model.setPassword(password);
+    }
+    public String getPassword(){
+        return this.model.getPassword();
+    }
+    public void setStudentId(int id){
+        this.model.setStudentId(id);
+    }
+    public int getStudentId(){
+       return this.model.getStudentId();
+    }
+    public void setBorrowedCount(){
+        this.model.setBorrowedCount();
+    }
+    public void updateBorrowedCount(){
+        this.model.updateBorrowedCount();
+    }
+    public int getBorrowedCount(){
+        return this.model.getBorrowedCount();
+    }
+    public void updateView(){
+        try {
+            this.view.printStudentDetails(this.getName(),this.getEmail(),this.getMobileNum(),this.getStudentId());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
