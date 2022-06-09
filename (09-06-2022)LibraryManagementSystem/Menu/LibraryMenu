@@ -1,0 +1,139 @@
+package Menu;
+import Model.*;
+import View.*;
+import Controller.*;
+import Administator.Admin;
+import java.util.HashMap;
+import Input.InputsFromUser;
+public class LibraryMenu {
+    private static String accountName;
+    private final InputsFromUser inputsFromUser = new InputsFromUser();
+    private static final HashMap<String, StudentAccountController> studentDetails = new HashMap<>();
+    private static final HashMap<String, LibrarianAccountController> librarianDetails = new HashMap<>();
+    public void mainMenu() {
+        String userName;
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println();
+        System.out.println("*******************************************************");
+        System.out.println("!        WELCOME TO LIBRARY MANAGEMENT SYSTEM         !");
+        System.out.println("*******************************************************");
+        System.out.println("!               Enter 1 to Signup                     !");
+        System.out.println("!               Enter 2 to Login                      !");
+        System.out.println("*******************************************************");
+        System.out.println();
+        int userChoice = inputsFromUser.inputChoice();
+        switch (AccountActions.values()[userChoice-1]) {
+            case Signup:
+                System.out.println("Creating new Account");
+                int userId = new Admin().generateId();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println();
+                System.out.println("*******************************************************");
+                System.out.println("!              USER ID GENERATED                      !");
+                System.out.println("*******************************************************");
+                System.out.println("Your id is: " + userId);
+                System.out.println("*******************************************************");
+                System.out.println();
+                String name = inputsFromUser.inputName();
+                String email = inputsFromUser.inputEmail();
+                long mobileNum = inputsFromUser.inputMobileNum();
+                userName = inputsFromUser.inputUserName();
+                System.out.println("Note: Your password should contain uppercase,lowercase letters,digits and should be of length 8");
+                String password = inputsFromUser.inputPassword();
+                if (userId >= 1 && userId <= 1000) {
+                    while(librarianDetails.containsKey(userName) || studentDetails.containsKey(userName)) {
+                        System.out.println("User Already Exist. Reenter your details");
+                        userName = inputsFromUser.inputUserName();
+                        password = inputsFromUser.inputPassword();
+                    }
+                    System.out.println("Your account has been created successfully");
+                    LibrarianAccountModelModel librarianAccountModel = new LibrarianAccountModelModel();
+                    LibrarianAccountView librarianAccountView = new LibrarianAccountView();
+                    LibrarianAccountController librarianAccountController = new LibrarianAccountController(librarianAccountModel, librarianAccountView);
+                    librarianAccountController.setName(name);
+                    librarianAccountController.setEmail(email);
+                    librarianAccountController.setMobileNum(mobileNum);
+                    librarianAccountController.setUserName(userName);
+                    librarianAccountController.setPassword(password);
+                    librarianAccountController.setLibrarianId(userId);
+                    librarianDetails.put(userName, librarianAccountController);
+                }
+                else if (userId >= 1001 && userId <= 2000) {
+                    while (studentDetails.containsKey(userName) || librarianDetails.containsKey(userName)) {
+                        System.out.println("User Already Exist. Reenter your details");
+                        userName = inputsFromUser.inputUserName();
+                        password = inputsFromUser.inputPassword();
+                    }
+                    System.out.println("Your account has been created successfully");
+                    StudentAccountModel studentAccountModel = new StudentAccountModel();
+                    StudentAccountView studentAccountView = new StudentAccountView();
+                    StudentAccountController studentAccountController = new StudentAccountController(studentAccountModel, studentAccountView);
+                    studentAccountController.setName(name);
+                    studentAccountController.setEmail(email);
+                    studentAccountController.setMobileNum(mobileNum);
+                    studentAccountController.setUserName(userName);
+                    studentAccountController.setPassword(password);
+                    studentAccountController.setStudentId(userId);
+                    studentDetails.put(userName, studentAccountController);
+                }
+                else{
+                    System.out.println("Invalid id");
+                }
+                mainMenu();
+                break;
+            case Login:
+                System.out.println("Please enter your details to login to your account");
+                userName = inputsFromUser.inputUserName();
+                password = inputsFromUser.inputPassword();
+                LibraryMenu.accountName = userName;
+                if (librarianDetails.containsKey(userName) && (librarianDetails.get(userName).getPassword().equals(password))) {
+                    new LibrarianMenu(librarianDetails.get(userName),inputsFromUser).Menu();
+                }
+                else if (studentDetails.containsKey(userName) && (studentDetails.get(userName).getPassword().equals(password))) {
+                   new StudentMenu(studentDetails.get(userName),inputsFromUser).Menu();
+                }
+                else {
+                    System.out.println("Invalid user");
+                }
+                mainMenu();
+                break;
+            default:
+                System.out.println("Invalid choice");
+                mainMenu();
+                break;
+        }
+    }
+    public static void removeUser(String user) {
+        if(librarianDetails.containsKey(user)) {
+            librarianDetails.remove(user);
+            if (user.equals(LibraryMenu.accountName)) {
+                System.out.println("Your Account have been removed");
+                System.exit(0);
+            }
+            else {
+                System.out.println("Account Removed");
+            }
+        }
+        else {
+            studentDetails.remove(user);
+            if (user.equals(LibraryMenu.accountName)) {
+                System.out.println("Your Account have been removed");
+                System.exit(0);
+            } else {
+                System.out.println("Account Removed");
+            }
+        }
+    }
+    public static void logOut() {
+        System.out.println("Thank you for using our library. You have been Logged out successfully");
+        new LibraryMenu().mainMenu();
+    }
+}
