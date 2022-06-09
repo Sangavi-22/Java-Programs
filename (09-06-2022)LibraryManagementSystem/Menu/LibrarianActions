@@ -1,0 +1,4 @@
+package Menu;
+public enum LibrarianActions{
+    ViewBooks, AddBooks, RemoveBooks,SearchBooks,ViewBorrowers,ViewProfile,RemoveAccount,LogOut
+}
