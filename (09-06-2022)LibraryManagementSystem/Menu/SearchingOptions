@@ -1,0 +1,4 @@
+package Menu;
+public enum SearchingOptions {
+    SearchById,SearchByName,SearchByAuthor
+}
