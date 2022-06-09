@@ -1,0 +1,4 @@
+package Menu;
+public enum StudentActions {
+    ViewBooks,BorrowBooks,ReturnBooks,RenewBooks,SearchBooks,PayFine,ViewProfile,RemoveAccount,LogOut,ViewHelpLine
+}
