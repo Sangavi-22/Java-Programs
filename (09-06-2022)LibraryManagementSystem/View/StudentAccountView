@@ -1,0 +1,17 @@
+package View;
+
+public class StudentAccountView {
+    public void printStudentDetails(String name,String email,long mobileNum,int id) throws InterruptedException {
+        Thread.sleep(1000);
+        System.out.println();
+        System.out.println("*******************************************************");
+        System.out.println("!                  STUDENT DETAILS                    !");
+        System.out.println("*******************************************************");
+        System.out.println("Name: " +name);
+        System.out.println("Email: " +email);
+        System.out.println("Mobile: " +mobileNum);
+        System.out.println("Student Id: " +id);
+        System.out.println("*******************************************************");
+        System.out.println();
+    }
+}
