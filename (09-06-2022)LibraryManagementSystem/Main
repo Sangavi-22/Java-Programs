@@ -1,0 +1,11 @@
+import Controller.LibraryController;
+import Model.LibraryModel;
+import Menu.LibraryMenu;
+import View.LibraryView;
+public class Main{
+    public static void main(String args[]){
+        new LibraryController(LibraryModel.getInstance(),new LibraryView()).setPhoneNum();
+        LibraryMenu libraryMenu=new LibraryMenu();
+        libraryMenu.mainMenu();
+    }
+}
