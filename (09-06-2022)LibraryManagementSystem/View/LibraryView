@@ -1,0 +1,14 @@
+package View;
+
+public class LibraryView {
+    public void printPhoneNum(String phoneNum){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Please contact the library management if in need of help");
+        System.out.println("Library Assistance number is: "+phoneNum);
+        System.out.println();
+    }
+}
