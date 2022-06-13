@@ -1,0 +1,29 @@
+package DataStorage;
+import Controller.*;
+import Model.LibrarianAccountModel;
+import Model.StudentAccountModel;
+
+import java.util.HashMap;
+
+public interface DataSourceService {
+    void addBook(int id, BookControllerService bookController);
+    void removeBook(int id);
+    HashMap<Integer, BookControllerService> getBooks();
+    void addBorrower(int id, StudentAccountModel studentAccountModel);
+    void removeBorrower(int id);
+    HashMap<Integer, StudentAccountModel> getBorrowers();
+    boolean containsBook(int id);
+    BookControllerService getBook(int id);
+    void addStudent(String userName,StudentAccountModel studentAccountModel);
+    void addLibrarian(String userName, LibrarianAccountModel librarianAccountModel);
+    void removeStudent(String userName);
+    void removeLibrarian(String userName);
+    boolean containsStudent(String userName);
+    boolean containsLibrarian(String userName);
+    LibrarianAccountModel getLibrarian(String userName);
+    StudentAccountModel getStudent(String userName);
+    void addLibrarianController(LibrarianAccountModel librarianAccountModel,LibrarianAccountController librarianAccountController);
+    void addStudentController(StudentAccountModel studentAccountModel,StudentAccountController studentAccountController);
+    LibrarianAccountControllerService getLibrarianController(LibrarianAccountModel librarianAccountModel);
+    StudentAccountControllerService getStudentController(StudentAccountModel studentAccountModel);
+}
