@@ -1,0 +1,10 @@
+package View;
+import Controller.*;
+public interface LibrarianAccountViewService {
+    void inputLibrarianDetails(LibrarianAccountControllerService librarianAccountController);
+    void passDetailsToController(LibrarianAccountControllerService librarianAccountController);
+    void setController(LibrarianAccountControllerService librarianAccountController);
+
+    void librarianMenu();
+    void printLibrarianDetails(String name,String email,long mobileNum,int id);
+}
