@@ -1,0 +1,68 @@
+package Controller;
+import DataStorage.DataSource;
+import DataStorage.DataSourceService;
+import Model.LibrarianAccountModel;
+import View.LibrarianAccountViewService;
+public class LibrarianAccountController implements LibrarianAccountControllerService {
+    private final LibrarianAccountModel model;
+    private final LibrarianAccountViewService view;
+    private final static DataSourceService dataSource= DataSource.getInstance();
+    public LibrarianAccountController(LibrarianAccountModel model, LibrarianAccountViewService view){
+        this.model=model;
+        this.view=view;
+    }
+    public void setInputs(String userName,String password,int userId){
+        this.setUserName(userName);
+        this.setPassword(password);
+        this.setLibrarianId(userId);
+        this.view.inputLibrarianDetails(this);
+        addLibrarianToDataSource();
+    }
+    public void addLibrarianToDataSource(){
+        dataSource.addLibrarian(this.getUserName(),this.model);
+        dataSource.addLibrarianController(this.model,this);
+    }
+    public void menu(){
+        this.view.setController(this);
+        this.view.librarianMenu();
+    }
+    public void setName(String name){
+        this.model.setName(name);
+    }
+    public String getName(){
+        return this.model.getName();
+    }
+    public void setEmail(String email){
+        this.model.setEmail(email);
+    }
+    public String getEmail(){
+        return this.model.getEmail();
+    }
+    public void setMobileNum(long mobileNum){
+        this.model.setMobileNum(mobileNum);
+    }
+    public long getMobileNum(){
+        return this.model.getMobileNum();
+    }
+    public void setUserName(String userName){
+        this.model.setUserName(userName);
+    }
+    public String getUserName(){
+        return this.model.getUserName();
+    }
+    public void setPassword(String password){
+        this.model.setPassword(password);
+    }
+    public String getPassword(){
+        return this.model.getPassword();
+    }
+    public void setLibrarianId(int id){
+        this.model.setLibrarianId(id);
+    }
+    public int getLibrarianId(){
+       return this.model.getLibrarianId();
+    }
+    public void updateView(){
+        view.printLibrarianDetails(this.getName(),this.getEmail(),this.getMobileNum(),this.getLibrarianId());
+    }
+}
