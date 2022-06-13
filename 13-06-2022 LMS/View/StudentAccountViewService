@@ -1,0 +1,9 @@
+package View;
+import Controller.StudentAccountControllerService;
+public interface StudentAccountViewService {
+    void inputStudentDetails(StudentAccountControllerService studentAccountController);
+    void passDetailsToController(StudentAccountControllerService studentAccountController);
+    void setController(StudentAccountControllerService studentAccountController);
+    void studentMenu();
+    void printStudentDetails(String name,String email,long mobileNum,int id);
+}
