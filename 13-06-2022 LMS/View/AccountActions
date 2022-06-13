@@ -1,0 +1,5 @@
+package View;
+public enum AccountActions {
+    Signup,Login,Default
+
+}
