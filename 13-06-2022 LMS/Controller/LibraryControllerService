@@ -1,0 +1,18 @@
+package Controller;
+import Model.StudentAccountModel;
+public interface LibraryControllerService {
+    void setPhoneNum();
+    String getPhoneNum();
+    void updateView();
+    void viewBooks();
+    void addBook(int bookId, BookControllerService bookController);
+    void removeBook(int id);
+    int searchBookByItsName(String book);
+    int searchBookByItsAuthorName(String authorName);
+    boolean borrowBook(int id, StudentAccountModel studentAccountModel);
+    void viewBorrowers();
+    long returnBook(int id);
+    boolean renewBook(int id);
+    boolean containsId(int id);
+    BookControllerService returnObject(int id);
+}
