@@ -1,0 +1,23 @@
+package Model;
+import Controller.StudentAccountController;
+import Controller.BookController;
+import java.util.HashMap;
+public class LibraryModel {
+    private String phoneNum;
+    private static LibraryModel library =null;
+    private LibraryModel(){
+        //Constructor of Library class
+    }
+    public static LibraryModel getInstance(){
+        if(library ==null) {
+            library =new LibraryModel();
+        }
+        return library;
+    }
+    public void setPhoneNum(){
+        this.phoneNum="044-2645-2201";
+    }
+    public String getPhoneNum(){
+        return this.phoneNum;
+    }
+}
