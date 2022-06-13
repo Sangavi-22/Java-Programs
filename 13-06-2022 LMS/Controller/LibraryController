@@ -1,0 +1,144 @@
+package Controller;
+import DataStorage.DataSource;
+import DataStorage.DataSourceService;
+import Model.LibraryModel;
+import Model.StudentAccountModel;
+import View.LibraryViewService;
+import View.StudentAccountView;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class LibraryController implements LibraryControllerService {
+    private final LibraryModel model;
+    private final LibraryViewService view;
+    private final DataSourceService dataSource=DataSource.getInstance();
+    private HashMap<Integer,BookControllerService>libraryBooks;
+    private  HashMap<Integer, StudentAccountModel>borrowerDetails;
+    public LibraryController(LibraryModel model,LibraryViewService view){
+        this.model=model;
+        this.view=view;
+    }
+    public void setPhoneNum(){
+        this.model.setPhoneNum();
+    }
+    public String getPhoneNum(){
+        return this.model.getPhoneNum();
+    }
+    public void updateView(){
+        view.printPhoneNum(this.getPhoneNum());
+    }
+    public void viewBooks(){
+        libraryBooks=dataSource.getBooks();
+        for(int key:libraryBooks.keySet()) {
+            libraryBooks.get(key).updateView();
+        }
+    }
+    public void addBook(int bookId, BookControllerService bookController){
+        dataSource.addBook(bookId,bookController);
+    }
+    public void removeBook(int id){
+        dataSource.removeBook(id);
+    }
+    public int searchBookByItsName(String book){
+        int found=0;
+        libraryBooks=dataSource.getBooks();
+        for(int key:libraryBooks.keySet()) {
+            if(libraryBooks.get(key).getBookName().toLowerCase().contains(book.toLowerCase())) {
+                libraryBooks.get(key).updateView();
+                found++;
+            }
+            else{
+                continue;
+            }
+        }
+        return found;
+    }
+    public int searchBookByItsAuthorName(String authorName){
+        int found=0;
+        libraryBooks=dataSource.getBooks();
+        for(int key:libraryBooks.keySet()) {
+            ArrayList<String> AuthorsName = libraryBooks.get(key).getAuthorsName();
+            for (String name : AuthorsName) {
+                if (name.toLowerCase().contains(authorName.toLowerCase())) {
+                    System.out.println(authorName);
+                    libraryBooks.get(key).updateView();
+                    found++;
+                    break;
+                }
+            }
+        }
+        return found;
+    }
+    public boolean borrowBook(int id, StudentAccountModel studentAccountModel){
+        boolean found;
+        libraryBooks=dataSource.getBooks();
+        if(libraryBooks.containsKey(id) && libraryBooks.get(id).getBookCount()>0) {
+            libraryBooks.get(id).updateBookCount();
+            libraryBooks.get(id).setBookIssueDate();
+            libraryBooks.get(id).setBookDueDate();
+            libraryBooks.get(id).updateView();
+            libraryBooks.get(id).printDates();
+            dataSource.addBorrower(id,studentAccountModel);
+            StudentAccountView studentAccountView=new StudentAccountView();
+            StudentAccountControllerService studentAccountController=new StudentAccountController(studentAccountModel,studentAccountView);
+            studentAccountController.setBorrowedCount();
+            found=true;
+        }
+        else {
+            found=false;
+        }
+        return found;
+    }
+    public void viewBorrowers(){
+        borrowerDetails=dataSource.getBorrowers();
+        libraryBooks=dataSource.getBooks();
+        for(int key:borrowerDetails.keySet()){
+            libraryBooks.get(key).updateView();
+            libraryBooks.get(key).printDates();
+            StudentAccountView studentAccountView=new StudentAccountView();
+            StudentAccountControllerService studentAccountController=new StudentAccountController(borrowerDetails.get(key),studentAccountView);
+            studentAccountController.updateView();
+        }
+    }
+    public long returnBook(int id)
+    {
+        long difference;
+        libraryBooks=dataSource.getBooks();
+        borrowerDetails=dataSource.getBorrowers();
+        if(libraryBooks.containsKey(id)) {
+            borrowerDetails.get(id).updateBorrowedCount();
+            libraryBooks.get(id).setBookCount();
+            libraryBooks.get(id).setBookReturnedDateForReturn();
+            difference=libraryBooks.get(id).hasExpired();
+            dataSource.removeBorrower(id);
+        }
+        else{
+            difference=0;
+        }
+        return difference;
+    }
+    public boolean renewBook(int id) {
+        boolean renewed=false;
+        libraryBooks=dataSource.getBooks();
+        borrowerDetails=dataSource.getBorrowers();
+        if (libraryBooks.containsKey(id) && borrowerDetails.containsKey(id)) {
+            libraryBooks.get(id).setBookReturnedDateForRenew();
+            if (libraryBooks.get(id).hasExpired()<0) {
+                libraryBooks.get(id).setBookIssueDate();
+                libraryBooks.get(id).setBookDueDate();
+                libraryBooks.get(id).printDates();
+            }
+            renewed=true;
+        }
+        else{
+            renewed=false;
+        }
+        return renewed;
+    }
+    public boolean containsId(int id){
+        return dataSource.containsBook(id);
+    }
+    public BookControllerService returnObject(int id){
+        return dataSource.getBook(id);
+    }
+}
