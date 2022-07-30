@@ -1,0 +1,49 @@
+import java.util.Scanner; 
+class Page{    
+    String pageType,pageColor; 
+    int noOfPages;
+    public void setPageDetails(int noOfPages, String pageType,String pageColor) {
+        this.noOfPages=noOfPages; 
+        this.pageType=pageType; 
+        this.pageColor=pageColor;
+    }
+    
+} 
+class Book{  
+    Page pageDetails;
+    String authorName, bookName; 
+    int bookCost;
+    public void setBookDetails(String bookName,String authorName,int bookCost){  
+        this.bookName=bookName;  
+        this.authorName=authorName; 
+        this.bookCost=bookCost;
+    } 
+    public void display(Page pageDetails){ 
+        System.out.println("Displaying the book details"); 
+        System.out.println("Name: "+bookName); 
+        System.out.println("Author Name: "+authorName);  
+        System.out.println("Cost of the book: "+bookCost); 
+        System.out.println(" Total No of Pages: "+pageDetails.noOfPages);  
+        System.out.println("Type: "+pageDetails.pageType); 
+        System.out.println("Color of the page: "+pageDetails.pageColor); 
+    } 
+} 
+class Main{ 
+    public static void main(String[] args){ 
+        Scanner sc=new Scanner(System.in); 
+        String bookName,authorName,pageType,pageColor;
+        int bookCost,noOfPages;   
+        System.out.println("Enter the book name, author name, page type, page color, book cost, no of pages");
+        bookName=sc.nextLine(); 
+        authorName=sc.nextLine();  
+        pageType=sc.nextLine(); 
+        pageColor=sc.nextLine();  
+        bookCost=sc.nextInt(); 
+        noOfPages=sc.nextInt(); 
+        Book bookDetails=new Book(); 
+        Page pageDetails=new Page(); 
+        bookDetails.setBookDetails(bookName,authorName,bookCost); 
+        pageDetails.setPageDetails(noOfPages,pageType,pageColor); 
+        bookDetails.display(pageDetails); 
+    } 
+}
